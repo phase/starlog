@@ -1,0 +1,11 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import "@/index.css";
+import BlockCalendar from "@/components/BlockCalendar";
+
+import cachedPhase from "@/assets/cached/phase.json";
+---
+
+<Layout>
+    <BlockCalendar starredRepos={cachedPhase} client:load />
+</Layout>

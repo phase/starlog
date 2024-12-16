@@ -1,5 +1,8 @@
 import type { StarredRepository } from "@/github/stars";
 import { useMemo } from "react";
+import LANGUAGE_COLORS from "@/assets/data/languageColors.json";
+import * as Tooltip from "@radix-ui/react-tooltip";
+import "./tooltipStyle.css";
 
 interface BlockCalendarProps {
   starredRepos: StarredRepository[];
@@ -20,68 +23,44 @@ const MONTHS = [
   "Nov",
   "Dec",
 ];
+const NO_DATA_COLOR = "#f0f0f0"; // Lighter grey for days without data
 
-const LANGUAGE_COLORS: { [key: string]: string } = {
-  JavaScript: "#f1e05a",
-  TypeScript: "#2b7489",
-  Python: "#3572A5",
-  Java: "#b07219",
-  C: "#555555",
-  "C++": "#f34b7d",
-  "C#": "#178600",
-  Ruby: "#701516",
-  Go: "#00ADD8",
-  Rust: "#dea584",
-  Swift: "#ffac45",
-  Kotlin: "#F18E33",
-  PHP: "#4F5D95",
-  Scala: "#c22d40",
-  Haskell: "#5e5086",
-  Lua: "#000080",
-  Shell: "#89e051",
-  PowerShell: "#012456",
-  Perl: "#0298c3",
-  R: "#198CE7",
-  MATLAB: "#e16737",
-  Dart: "#00B4AB",
-  Elixir: "#6e4a7e",
-  Clojure: "#db5855",
-  Erlang: "#B83998",
-  Julia: "#a270ba",
-  Groovy: "#e69f56",
-  Assembly: "#6E4C13",
-  ObjectiveC: "#438eff",
-  "Vim script": "#199f4b",
-  OCaml: "#3be133",
-  Fortran: "#4d41b1",
-  COBOL: "#7f7f7f",
-  Lisp: "#3fb68b",
-  "F#": "#b845fc",
-  Crystal: "#000100",
-  Prolog: "#74283c",
-  Elm: "#60B5CC",
-  Racket: "#3c5caa",
-  Zig: "#ec915c",
-  Haxe: "#df7900",
-  Nim: "#37775b",
-  Raku: "#0000fb",
-  Vala: "#fbe5cd",
-  Nix: "#7e7eff",
-  Reason: "#ff5847",
-  Idris: "#b30000",
-  Scheme: "#1e4aec",
-  Ada: "#02f88c",
-  Forth: "#341708",
-  Tcl: "#e4cc98",
-  Apex: "#1797c0",
-  SAS: "#B34936",
-  ActionScript: "#882B0F",
-  Smalltalk: "#596706",
-  D: "#ba595e",
-  Solidity: "#AA6746",
-  Cuda: "#3A4E3A",
-  default: "#cccccc",
-};
+function hexToHSL(hex: string): [number, number, number] {
+  const r = parseInt(hex.slice(1, 3), 16) / 255;
+  const g = parseInt(hex.slice(3, 5), 16) / 255;
+  const b = parseInt(hex.slice(5, 7), 16) / 255;
+
+  const max = Math.max(r, g, b);
+  const min = Math.min(r, g, b);
+  let h,
+    s,
+    l = (max + min) / 2;
+
+  if (max === min) {
+    h = s = 0;
+  } else {
+    const d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch (max) {
+      case r:
+        h = (g - b) / d + (g < b ? 6 : 0);
+        break;
+      case g:
+        h = (b - r) / d + 2;
+        break;
+      case b:
+        h = (r - g) / d + 4;
+        break;
+    }
+    h /= 6;
+  }
+
+  return [h * 360, s * 100, l * 100];
+}
+
+function hslToString(h: number, s: number, l: number): string {
+  return `hsl(${h}, ${s}%, ${l}%)`;
+}
 
 export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
   const calendarData = useMemo(() => {
@@ -101,6 +80,16 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
       Object.keys(calendarData).map((date) => date.split("-")[0]),
     );
     return Array.from(yearsSet).sort().reverse();
+  }, [calendarData]);
+
+  const monthlyMaxStars = useMemo(() => {
+    const maxStars: { [key: string]: number } = {};
+    Object.entries(calendarData).forEach(([date, repos]) => {
+      const [year, month] = date.split("-");
+      const key = `${year}-${month}`;
+      maxStars[key] = Math.max(maxStars[key] || 0, repos.length);
+    });
+    return maxStars;
   }, [calendarData]);
 
   const getLanguagesForDay = (
@@ -123,10 +112,33 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
     return sortedLanguages.length > 0 ? sortedLanguages[0][0] : "Unknown";
   };
 
-  const getColor = (repos: StarredRepository[]): string => {
+  const getColor = (repos: StarredRepository[], date: Date): string => {
+    if (repos.length === 0) {
+      return NO_DATA_COLOR;
+    }
+
     const languageCounts = getLanguagesForDay(repos);
     const mostPopularLanguage = getMostPopularLanguage(languageCounts);
-    return LANGUAGE_COLORS[mostPopularLanguage] || LANGUAGE_COLORS.default;
+    const baseColor =
+      LANGUAGE_COLORS[mostPopularLanguage] || LANGUAGE_COLORS.default;
+
+    // const [h, s, l] = hexToHSL(baseColor);
+
+    // const yearMonth = `${date.getFullYear()}-${(date.getMonth() + 1).toString().padStart(2, "0")}`;
+    // const maxStars = monthlyMaxStars[yearMonth] || 1;
+    // const starCount = repos.length;
+
+    // // Adjust lightness based on star count relative to month's maximum
+    // // Reduce the maximum lightness adjustment to 20% instead of 50%
+    // const lightnessAdjustment = Math.max(
+    //   0,
+    //   Math.min(20, (1 - starCount / maxStars) * 20),
+    // );
+    // const adjustedLightness = Math.min(100, l + lightnessAdjustment);
+
+    // return hslToString(h, s, adjustedLightness);
+
+    return baseColor;
   };
 
   const getMonthData = (year: number, month: number) => {
@@ -167,19 +179,58 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
     });
     return Object.entries(languageCounts)
       .sort((a, b) => b[1] - a[1])
-      .slice(0, 7);
+      .slice(0, 5);
   };
 
-  const formatTooltip = (
+  const formatTooltipContent = (
     dateString: string,
     repos: StarredRepository[],
-  ): string => {
+  ): JSX.Element => {
     const languageCounts = getLanguagesForDay(repos);
-    const languageList = Object.entries(languageCounts)
-      .sort((a, b) => b[1] - a[1])
-      .map(([lang, count]) => `${lang}: ${count}`)
-      .join("\n");
-    return `${dateString}\nTotal stars: ${repos.length}\nLanguages:\n${languageList}`;
+    const sortedLanguages = Object.entries(languageCounts).sort(
+      (a, b) => b[1] - a[1],
+    );
+    const formattedDate = new Date(dateString).toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+
+    return (
+      <div className="p-2 max-w-xs">
+        <div className="font-bold mb-1">{formattedDate}</div>
+        <div className="mb-2">Total stars: {repos.length}</div>
+        <ul className="space-y-1">
+          {sortedLanguages.map(([lang, count]) => (
+            <li key={lang} className="flex items-center">
+              <span
+                className="w-3 h-3 rounded-full mr-2"
+                style={{
+                  backgroundColor:
+                    LANGUAGE_COLORS[lang] || LANGUAGE_COLORS.default,
+                }}
+              ></span>
+              {lang}: {count}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  };
+
+  const getMonthTotal = (year: number, month: number): number => {
+    return Object.entries(calendarData)
+      .filter(([date]) =>
+        date.startsWith(`${year}-${(month + 1).toString().padStart(2, "0")}`),
+      )
+      .reduce((total, [, repos]) => total + repos.length, 0);
+  };
+
+  const getYearTotal = (year: string): number => {
+    return Object.entries(calendarData)
+      .filter(([date]) => date.startsWith(year))
+      .reduce((total, [, repos]) => total + repos.length, 0);
   };
 
   return (
@@ -187,8 +238,13 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
       {years.map((year) => (
         <div key={year} className="space-y-4">
           <div>
-            <div className="text-sm font-semibold">{year}</div>
-            <div className="text-xs text-gray-500 mt-1">
+            <div className="text-sm font-semibold">
+              {year}{" "}
+              <span className="font-normal text-stone-500">
+                ({getYearTotal(year)} stars)
+              </span>
+            </div>
+            <div className="text-xs text-stone-500 mt-1">
               Top languages:{" "}
               {getTopLanguagesForYear(year).map(([lang, count], index) => (
                 <span key={lang}>
@@ -208,40 +264,65 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
           <div className="flex items-start">
             <div className="mr-2">
               {DAYS.map((day) => (
-                <div key={day} className="h-4 w-4 text-[10px] text-gray-400">
+                <div key={day} className="h-4 w-4 text-[10px] text-stone-400">
                   {day[0]}
                 </div>
               ))}
             </div>
             <div className="flex flex-wrap">
               {MONTHS.map((month, monthIndex) => (
-                <div key={month} className="mr-4 mb-4">
+                <div key={`${year}-${month}`} className="mr-4 mb-4">
                   <div className="flex">
                     {getMonthData(parseInt(year), monthIndex).map(
                       (week, weekIndex) => (
-                        <div key={weekIndex} className="mr-1">
-                          {week.map((date) => {
+                        <div
+                          key={`${year}-${month}-${weekIndex}`}
+                          className="mr-1"
+                        >
+                          {week.map((date, dayIndex) => {
                             const dateString = date.toISOString().split("T")[0];
                             const repos = calendarData[dateString] || [];
                             return (
-                              <div
-                                key={dateString}
-                                className="w-4 h-4 rounded-sm"
-                                style={{
-                                  backgroundColor:
-                                    date.getMonth() === monthIndex
-                                      ? getColor(repos)
-                                      : "transparent",
-                                }}
-                                title={formatTooltip(dateString, repos)}
-                              />
+                              <Tooltip.Provider
+                                key={`${dateString}-${dayIndex}`}
+                                delayDuration={0}
+                                skipDelayDuration={0}
+                              >
+                                <Tooltip.Root delayDuration={0}>
+                                  <Tooltip.Trigger asChild>
+                                    <div
+                                      className="w-4 h-4 rounded-sm cursor-pointer"
+                                      style={{
+                                        backgroundColor:
+                                          date.getMonth() === monthIndex
+                                            ? getColor(repos, date)
+                                            : "transparent",
+                                      }}
+                                    />
+                                  </Tooltip.Trigger>
+                                  <Tooltip.Portal>
+                                    <Tooltip.Content
+                                      className="bg-white border border-gray-200 rounded-md shadow-md z-50"
+                                      sideOffset={5}
+                                    >
+                                      {formatTooltipContent(dateString, repos)}
+                                      <Tooltip.Arrow className="fill-white" />
+                                    </Tooltip.Content>
+                                  </Tooltip.Portal>
+                                </Tooltip.Root>
+                              </Tooltip.Provider>
                             );
                           })}
                         </div>
                       ),
                     )}
                   </div>
-                  <div className="text-xs text-center mt-1">{month}</div>
+                  <div className="text-xs text-center mt-1">
+                    {month}
+                    <span className="text-stone-400 ml-1">
+                      ({getMonthTotal(parseInt(year), monthIndex)})
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>

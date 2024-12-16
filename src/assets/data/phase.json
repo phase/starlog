@@ -1,0 +1,2000 @@
+[
+  {
+    "starredAt": "2024-12-16T06:33:55Z",
+    "node": {
+      "name": "shiki",
+      "owner": {
+        "login": "shikijs"
+      },
+      "description": "A beautiful yet powerful syntax highlighter",
+      "url": "https://github.com/shikijs/shiki",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-16T06:28:51Z",
+    "node": {
+      "name": "bright",
+      "owner": {
+        "login": "code-hike"
+      },
+      "description": "React Server Component for syntax highlighting ",
+      "url": "https://github.com/code-hike/bright",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-16T05:41:13Z",
+    "node": {
+      "name": "react-native-safe-area-context",
+      "owner": {
+        "login": "th3rdwave"
+      },
+      "description": "A flexible way to handle safe area insets in JS. Also works on Android and Web! ",
+      "url": "https://github.com/th3rdwave/react-native-safe-area-context",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-16T05:30:59Z",
+    "node": {
+      "name": "workers-qb",
+      "owner": {
+        "login": "G4brym"
+      },
+      "description": "Zero dependencies Query Builder for Cloudflare Workers",
+      "url": "https://github.com/G4brym/workers-qb",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-16T04:40:04Z",
+    "node": {
+      "name": "map-of-github",
+      "owner": {
+        "login": "anvaka"
+      },
+      "description": "Inspirational Mapping",
+      "url": "https://github.com/anvaka/map-of-github",
+      "primaryLanguage": {
+        "name": "Vue"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-16T04:25:43Z",
+    "node": {
+      "name": "ts2c",
+      "owner": {
+        "login": "andrei-markeev"
+      },
+      "description": "Convert Javascript/TypeScript to C",
+      "url": "https://github.com/andrei-markeev/ts2c",
+      "primaryLanguage": {
+        "name": "C"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-15T21:15:56Z",
+    "node": {
+      "name": "turborepo-next-tauri",
+      "owner": {
+        "login": "Seb-L"
+      },
+      "description": null,
+      "url": "https://github.com/Seb-L/turborepo-next-tauri",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-15T20:54:10Z",
+    "node": {
+      "name": "react-native-webgpu",
+      "owner": {
+        "login": "wcandillon"
+      },
+      "description": "React Native implementation of WebGPU using Dawn",
+      "url": "https://github.com/wcandillon/react-native-webgpu",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-15T20:30:18Z",
+    "node": {
+      "name": "sh-raylib",
+      "owner": {
+        "login": "thejustinwalsh"
+      },
+      "description": "raylib bindings for static hermes",
+      "url": "https://github.com/thejustinwalsh/sh-raylib",
+      "primaryLanguage": {
+        "name": "C"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-15T19:07:18Z",
+    "node": {
+      "name": "metro",
+      "owner": {
+        "login": "facebook"
+      },
+      "description": "🚇 The JavaScript bundler for React Native",
+      "url": "https://github.com/facebook/metro",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-15T19:04:04Z",
+    "node": {
+      "name": "fullstack-react-on-elysia-demo",
+      "owner": {
+        "login": "akirak"
+      },
+      "description": "An example Elysia application with SSR + client-side interactivity of React through the Astro Container API",
+      "url": "https://github.com/akirak/fullstack-react-on-elysia-demo",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-15T18:44:05Z",
+    "node": {
+      "name": "expo-next-monorepo-example",
+      "owner": {
+        "login": "axeldelafosse"
+      },
+      "description": "Create a universal React app using Expo and Next.js in a monorepo",
+      "url": "https://github.com/axeldelafosse/expo-next-monorepo-example",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-15T18:23:57Z",
+    "node": {
+      "name": "solito",
+      "owner": {
+        "login": "nandorojo"
+      },
+      "description": "🧍‍♂️ React Native + Next.js, unified.",
+      "url": "https://github.com/nandorojo/solito",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-15T18:12:29Z",
+    "node": {
+      "name": "expo",
+      "owner": {
+        "login": "expo"
+      },
+      "description": "An open-source framework for making universal native apps with React. Expo runs on Android, iOS, and the web.",
+      "url": "https://github.com/expo/expo",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-15T04:25:15Z",
+    "node": {
+      "name": "tunnel-rat",
+      "owner": {
+        "login": "pmndrs"
+      },
+      "description": "🐀 Non gratum anus rodentum",
+      "url": "https://github.com/pmndrs/tunnel-rat",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-15T01:48:19Z",
+    "node": {
+      "name": "swc-plugin-another-transform-imports",
+      "owner": {
+        "login": "lonelyhentxi"
+      },
+      "description": "Another wasm swc transform imports plugin",
+      "url": "https://github.com/lonelyhentxi/swc-plugin-another-transform-imports",
+      "primaryLanguage": {
+        "name": "Rust"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-15T01:43:53Z",
+    "node": {
+      "name": "swc-plugin-transform-import",
+      "owner": {
+        "login": "ankitchouhan1020"
+      },
+      "description": "SWC plugin for transforming import path.",
+      "url": "https://github.com/ankitchouhan1020/swc-plugin-transform-import",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-15T01:09:15Z",
+    "node": {
+      "name": "htm",
+      "owner": {
+        "login": "developit"
+      },
+      "description": "Hyperscript Tagged Markup: JSX alternative using standard tagged templates, with compiler support.",
+      "url": "https://github.com/developit/htm",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-15T00:56:31Z",
+    "node": {
+      "name": "drei",
+      "owner": {
+        "login": "pmndrs"
+      },
+      "description": "🥉 useful helpers for react-three-fiber",
+      "url": "https://github.com/pmndrs/drei",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-15T00:52:39Z",
+    "node": {
+      "name": "troika",
+      "owner": {
+        "login": "protectwise"
+      },
+      "description": "A JavaScript framework for interactive 3D and 2D visualizations",
+      "url": "https://github.com/protectwise/troika",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T20:54:34Z",
+    "node": {
+      "name": "elysia-cors",
+      "owner": {
+        "login": "elysiajs"
+      },
+      "description": "Plugin for Elysia that for Cross Origin Requests (CORs)",
+      "url": "https://github.com/elysiajs/elysia-cors",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T19:48:12Z",
+    "node": {
+      "name": "tsup",
+      "owner": {
+        "login": "egoist"
+      },
+      "description": "The simplest and fastest way to bundle your TypeScript libraries.",
+      "url": "https://github.com/egoist/tsup",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T18:25:50Z",
+    "node": {
+      "name": "Cap",
+      "owner": {
+        "login": "CapSoftware"
+      },
+      "description": "Open source Loom alternative. Beautiful, shareable screen recordings.",
+      "url": "https://github.com/CapSoftware/Cap",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T18:23:32Z",
+    "node": {
+      "name": "spacedrive",
+      "owner": {
+        "login": "spacedriveapp"
+      },
+      "description": "Spacedrive is an open source cross-platform file explorer, powered by a virtual distributed filesystem written in Rust.",
+      "url": "https://github.com/spacedriveapp/spacedrive",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T17:45:22Z",
+    "node": {
+      "name": "bun-elysia-nextjs",
+      "owner": {
+        "login": "ItzDerock"
+      },
+      "description": "Demo showing Bun + Elysia + NextJS (app dir)",
+      "url": "https://github.com/ItzDerock/bun-elysia-nextjs",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T06:49:56Z",
+    "node": {
+      "name": "vite-plugin-react-native-web",
+      "owner": {
+        "login": "Bram-dc"
+      },
+      "description": "React Native Web support for Vite",
+      "url": "https://github.com/Bram-dc/vite-plugin-react-native-web",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T04:42:54Z",
+    "node": {
+      "name": "astro-turborepo",
+      "owner": {
+        "login": "cngJo"
+      },
+      "description": null,
+      "url": "https://github.com/cngJo/astro-turborepo",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T04:08:07Z",
+    "node": {
+      "name": "zeno",
+      "owner": {
+        "login": "zeno-oss"
+      },
+      "description": "A Truly Cross Platform Monorepo featuring Next.js + tRPC + Tauri + Vite + Expo (React Native).",
+      "url": "https://github.com/zeno-oss/zeno",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T03:15:35Z",
+    "node": {
+      "name": "create-turbo-with-expo",
+      "owner": {
+        "login": "Marknjo"
+      },
+      "description": "A Turbo Monorepo Project Starter for Expo apps (React Native), Storybook, NextJS, Solito & NestJs as API",
+      "url": "https://github.com/Marknjo/create-turbo-with-expo",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T02:59:21Z",
+    "node": {
+      "name": "orbit",
+      "owner": {
+        "login": "expo"
+      },
+      "description": "Accelerate your development workflow with one-click build launches and simulator management from your macOS menu bar",
+      "url": "https://github.com/expo/orbit",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T01:00:46Z",
+    "node": {
+      "name": "nativewind",
+      "owner": {
+        "login": "nativewind"
+      },
+      "description": "React Native utility-first universal design system - powered by Tailwind CSS",
+      "url": "https://github.com/nativewind/nativewind",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T00:55:54Z",
+    "node": {
+      "name": "clickhouse-insert-cloudflare-worker",
+      "owner": {
+        "login": "mrturck"
+      },
+      "description": null,
+      "url": "https://github.com/mrturck/clickhouse-insert-cloudflare-worker",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T00:36:36Z",
+    "node": {
+      "name": "Vite-and-Expo-app",
+      "owner": {
+        "login": "mseaman26"
+      },
+      "description": null,
+      "url": "https://github.com/mseaman26/Vite-and-Expo-app",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T00:28:58Z",
+    "node": {
+      "name": "react-native-paper",
+      "owner": {
+        "login": "callstack"
+      },
+      "description": "Material Design for React Native (Android & iOS)",
+      "url": "https://github.com/callstack/react-native-paper",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T00:28:23Z",
+    "node": {
+      "name": "react-native-web",
+      "owner": {
+        "login": "necolas"
+      },
+      "description": "Cross-platform React UI packages",
+      "url": "https://github.com/necolas/react-native-web",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-14T00:09:50Z",
+    "node": {
+      "name": "expo-template-bare-minimum-tvos",
+      "owner": {
+        "login": "abdullahceylan"
+      },
+      "description": "This bare project template includes a minimal setup for using unimodules with React Native tvOS.",
+      "url": "https://github.com/abdullahceylan/expo-template-bare-minimum-tvos",
+      "primaryLanguage": {
+        "name": "Java"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T20:44:13Z",
+    "node": {
+      "name": "react-native-tvos",
+      "owner": {
+        "login": "react-native-tvos"
+      },
+      "description": "React Native repo with additions for Apple TV and Android TV support. ",
+      "url": "https://github.com/react-native-tvos/react-native-tvos",
+      "primaryLanguage": {
+        "name": "C++"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T20:40:50Z",
+    "node": {
+      "name": "lottie-web",
+      "owner": {
+        "login": "airbnb"
+      },
+      "description": "Render After Effects animations natively on Web, Android and iOS, and React Native. http://airbnb.io/lottie/",
+      "url": "https://github.com/airbnb/lottie-web",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T19:27:56Z",
+    "node": {
+      "name": "astrofront",
+      "owner": {
+        "login": "themefisher"
+      },
+      "description": "AstroJS-Powered Shopify Storefront Boilerplate with TailwindCSS and Nanostores.",
+      "url": "https://github.com/themefisher/astrofront",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T19:15:37Z",
+    "node": {
+      "name": "intel-one-mono",
+      "owner": {
+        "login": "intel"
+      },
+      "description": "Intel One Mono font repository",
+      "url": "https://github.com/intel/intel-one-mono",
+      "primaryLanguage": null
+    }
+  },
+  {
+    "starredAt": "2024-12-13T18:25:20Z",
+    "node": {
+      "name": "Paper-archive",
+      "owner": {
+        "login": "PaperMC"
+      },
+      "description": "Branches of Paper that used the older build setup and history",
+      "url": "https://github.com/PaperMC/Paper-archive",
+      "primaryLanguage": {
+        "name": "Java"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T06:34:40Z",
+    "node": {
+      "name": "next-view-transitions",
+      "owner": {
+        "login": "shuding"
+      },
+      "description": "Use CSS View Transitions API in Next.js App Router.",
+      "url": "https://github.com/shuding/next-view-transitions",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T05:47:33Z",
+    "node": {
+      "name": "miniplex",
+      "owner": {
+        "login": "hmans"
+      },
+      "description": "A 👩‍💻 developer-friendly entity management system for 🕹 games and similarly demanding applications, based on 🛠 ECS architecture.",
+      "url": "https://github.com/hmans/miniplex",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T05:35:50Z",
+    "node": {
+      "name": "TRELLIS",
+      "owner": {
+        "login": "microsoft"
+      },
+      "description": "Official repo for paper \"Structured 3D Latents for Scalable and Versatile 3D Generation\".",
+      "url": "https://github.com/microsoft/TRELLIS",
+      "primaryLanguage": {
+        "name": "Python"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T05:31:21Z",
+    "node": {
+      "name": "tamingLLMs",
+      "owner": {
+        "login": "souzatharsis"
+      },
+      "description": "Taming Language Models: A Practical Guide to LLM Pitfalls with Python Examples",
+      "url": "https://github.com/souzatharsis/tamingLLMs",
+      "primaryLanguage": {
+        "name": "Jupyter Notebook"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T05:24:21Z",
+    "node": {
+      "name": "px2svg",
+      "owner": {
+        "login": "meyerweb"
+      },
+      "description": "Converts raster images to SVG, using color-run optimization.",
+      "url": "https://github.com/meyerweb/px2svg",
+      "primaryLanguage": {
+        "name": "PHP"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T05:06:52Z",
+    "node": {
+      "name": "libsql",
+      "owner": {
+        "login": "tursodatabase"
+      },
+      "description": "libSQL is a fork of SQLite that is both Open Source, and Open Contributions.",
+      "url": "https://github.com/tursodatabase/libsql",
+      "primaryLanguage": {
+        "name": "C"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T04:50:39Z",
+    "node": {
+      "name": "spotify",
+      "owner": {
+        "login": "mrwebwork"
+      },
+      "description": "A Full Stack Spotify clone, built with Next.js, React, Tailwind, Supabase, PostgreSQL, and Stripe. It mimics Spotify's UI/UX and features robust backend functionalities. ",
+      "url": "https://github.com/mrwebwork/spotify",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T04:48:13Z",
+    "node": {
+      "name": "spotify-astro-transitions",
+      "owner": {
+        "login": "igorm84"
+      },
+      "description": "Clone of Spotify with Astro View Transitions integration for fluid navigation",
+      "url": "https://github.com/igorm84/spotify-astro-transitions",
+      "primaryLanguage": {
+        "name": "Astro"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T02:22:37Z",
+    "node": {
+      "name": "backend",
+      "owner": {
+        "login": "chronhq"
+      },
+      "description": "Backend for database. Python, Django, Postgres + PostGIS",
+      "url": "https://github.com/chronhq/backend",
+      "primaryLanguage": {
+        "name": "Python"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T02:22:36Z",
+    "node": {
+      "name": "frontend",
+      "owner": {
+        "login": "chronhq"
+      },
+      "description": "Frontend for interface. React, MobX, ES6",
+      "url": "https://github.com/chronhq/frontend",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T02:17:43Z",
+    "node": {
+      "name": "CartoDB-basemaps",
+      "owner": {
+        "login": "CartoDB"
+      },
+      "description": "CartoDB basemaps",
+      "url": "https://github.com/CartoDB/CartoDB-basemaps",
+      "primaryLanguage": {
+        "name": "CartoCSS"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T02:17:25Z",
+    "node": {
+      "name": "dark-matter-gl-style",
+      "owner": {
+        "login": "openmaptiles"
+      },
+      "description": "Dark Matter GL Style using OpenMapTiles",
+      "url": "https://github.com/openmaptiles/dark-matter-gl-style",
+      "primaryLanguage": null
+    }
+  },
+  {
+    "starredAt": "2024-12-13T02:17:24Z",
+    "node": {
+      "name": "positron-gl-style",
+      "owner": {
+        "login": "openmaptiles"
+      },
+      "description": "Positron GL style using OpenMapTiles",
+      "url": "https://github.com/openmaptiles/positron-gl-style",
+      "primaryLanguage": null
+    }
+  },
+  {
+    "starredAt": "2024-12-13T02:16:40Z",
+    "node": {
+      "name": "maputnik.github.io",
+      "owner": {
+        "login": "maputnik"
+      },
+      "description": "Maputnik website and hosted demo",
+      "url": "https://github.com/maputnik/maputnik.github.io",
+      "primaryLanguage": {
+        "name": "HTML"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-13T02:07:15Z",
+    "node": {
+      "name": "maptiler-toner-gl-style",
+      "owner": {
+        "login": "openmaptiles"
+      },
+      "description": "Port of the Stamen Maps Toner style to OpenMapTiles GL Style",
+      "url": "https://github.com/openmaptiles/maptiler-toner-gl-style",
+      "primaryLanguage": null
+    }
+  },
+  {
+    "starredAt": "2024-12-13T02:06:55Z",
+    "node": {
+      "name": "osm-liberty",
+      "owner": {
+        "login": "maputnik"
+      },
+      "description": "A free Mapbox GL basemap style for everyone",
+      "url": "https://github.com/maputnik/osm-liberty",
+      "primaryLanguage": {
+        "name": "Python"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-12T23:28:57Z",
+    "node": {
+      "name": "uber-cities",
+      "owner": {
+        "login": "sbma44"
+      },
+      "description": "Collect geo information on the cities that Uber is operating in",
+      "url": "https://github.com/sbma44/uber-cities",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-12T20:32:58Z",
+    "node": {
+      "name": "ServerMappings",
+      "owner": {
+        "login": "LunarClient"
+      },
+      "description": "Public mapping of Minecraft server IPs <-> a pretty display name",
+      "url": "https://github.com/LunarClient/ServerMappings",
+      "primaryLanguage": {
+        "name": "Python"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-12T19:01:10Z",
+    "node": {
+      "name": "dataverse",
+      "owner": {
+        "login": "IQSS"
+      },
+      "description": "Open source research data repository software",
+      "url": "https://github.com/IQSS/dataverse",
+      "primaryLanguage": {
+        "name": "Java"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-12T18:14:01Z",
+    "node": {
+      "name": "uikit",
+      "owner": {
+        "login": "pmndrs"
+      },
+      "description": "🎨 user interfaces for react-three-fiber",
+      "url": "https://github.com/pmndrs/uikit",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-12T07:56:06Z",
+    "node": {
+      "name": "ConbiniWars",
+      "owner": {
+        "login": "kikkia"
+      },
+      "description": "Mapping out the terrirory map for Japans convienience store war, using leaflet.",
+      "url": "https://github.com/kikkia/ConbiniWars",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-12T07:06:11Z",
+    "node": {
+      "name": "MappingAPI",
+      "owner": {
+        "login": "PublicaMundi"
+      },
+      "description": null,
+      "url": "https://github.com/PublicaMundi/MappingAPI",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-12T07:05:55Z",
+    "node": {
+      "name": "k23",
+      "owner": {
+        "login": "JonasKruckenberg"
+      },
+      "description": "Experimental WASM Microkernel Operating System",
+      "url": "https://github.com/JonasKruckenberg/k23",
+      "primaryLanguage": {
+        "name": "Rust"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-12T07:04:37Z",
+    "node": {
+      "name": "studiocms",
+      "owner": {
+        "login": "withstudiocms"
+      },
+      "description": "A dedicated CMS for Astro DB.  Built from the ground up by the Astro community.",
+      "url": "https://github.com/withstudiocms/studiocms",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-12T06:31:29Z",
+    "node": {
+      "name": "valtio",
+      "owner": {
+        "login": "pmndrs"
+      },
+      "description": "🧙 Valtio makes proxy-state simple  for React and Vanilla",
+      "url": "https://github.com/pmndrs/valtio",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-11T23:36:03Z",
+    "node": {
+      "name": "leaflet-rotate",
+      "owner": {
+        "login": "Raruto"
+      },
+      "description": "Leaflet plugin that allows to add rotation functionality to map tiles",
+      "url": "https://github.com/Raruto/leaflet-rotate",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-11T04:30:18Z",
+    "node": {
+      "name": "Leaflet.DistortableImageEnhanced",
+      "owner": {
+        "login": "sangdth"
+      },
+      "description": null,
+      "url": "https://github.com/sangdth/Leaflet.DistortableImageEnhanced",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-11T04:29:39Z",
+    "node": {
+      "name": "obsidian-tol-map",
+      "owner": {
+        "login": "TowerOfLondonArchive"
+      },
+      "description": "Embedded maps of Earth in Obsidian.",
+      "url": "https://github.com/TowerOfLondonArchive/obsidian-tol-map",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-11T01:50:57Z",
+    "node": {
+      "name": "sst",
+      "owner": {
+        "login": "sst"
+      },
+      "description": "Build full-stack apps on your own infrastructure.",
+      "url": "https://github.com/sst/sst",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-11T01:49:20Z",
+    "node": {
+      "name": "openauth",
+      "owner": {
+        "login": "openauthjs"
+      },
+      "description": "▦ Universal, standards-based auth provider.",
+      "url": "https://github.com/openauthjs/openauth",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T22:34:30Z",
+    "node": {
+      "name": "cesium",
+      "owner": {
+        "login": "CesiumGS"
+      },
+      "description": "An open-source JavaScript library for world-class 3D globes and maps :earth_americas:",
+      "url": "https://github.com/CesiumGS/cesium",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T22:34:24Z",
+    "node": {
+      "name": "cesium",
+      "owner": {
+        "login": "engr-saadat"
+      },
+      "description": "An open-source JavaScript library for world-class 3D globes and maps :earth_americas:",
+      "url": "https://github.com/engr-saadat/cesium",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T22:06:04Z",
+    "node": {
+      "name": "Leaflet.DistortableImage.Updated",
+      "owner": {
+        "login": "engr-saadat"
+      },
+      "description": "A Leaflet extension to distort or \"rubber sheet\" images",
+      "url": "https://github.com/engr-saadat/Leaflet.DistortableImage.Updated",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T18:56:04Z",
+    "node": {
+      "name": "limbo",
+      "owner": {
+        "login": "tursodatabase"
+      },
+      "description": "Limbo is a work-in-progress, in-process OLTP database management system, compatible with SQLite.",
+      "url": "https://github.com/tursodatabase/limbo",
+      "primaryLanguage": {
+        "name": "Rust"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T16:04:09Z",
+    "node": {
+      "name": "BareMetal-OS",
+      "owner": {
+        "login": "ReturnInfinity"
+      },
+      "description": "Build script for BareMetal OS and its related utilities",
+      "url": "https://github.com/ReturnInfinity/BareMetal-OS",
+      "primaryLanguage": {
+        "name": "Shell"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T08:53:01Z",
+    "node": {
+      "name": "ray-so",
+      "owner": {
+        "login": "raycast"
+      },
+      "description": "Create code snippets, browse AI prompts, create extension icons and more.",
+      "url": "https://github.com/raycast/ray-so",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T08:51:39Z",
+    "node": {
+      "name": "remark-smartypants",
+      "owner": {
+        "login": "silvenon"
+      },
+      "description": "remark plugin to implement SmartyPants",
+      "url": "https://github.com/silvenon/remark-smartypants",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T08:50:45Z",
+    "node": {
+      "name": "remark-gfm",
+      "owner": {
+        "login": "remarkjs"
+      },
+      "description": "remark plugin to support GFM (autolink literals, footnotes, strikethrough, tables, tasklists)",
+      "url": "https://github.com/remarkjs/remark-gfm",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T06:35:59Z",
+    "node": {
+      "name": "Leaflet.HighlightableLayers",
+      "owner": {
+        "login": "FacilMap"
+      },
+      "description": "Highlight Leaflet lines and polygons by adding a border and raise them above others. Add a transparent border to increase the tolerance for mouse/touch interactions.",
+      "url": "https://github.com/FacilMap/Leaflet.HighlightableLayers",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T06:12:11Z",
+    "node": {
+      "name": "content-structure",
+      "owner": {
+        "login": "MicroWebStacks"
+      },
+      "description": "Content Structure collect all your markdown files meta data and parses the Abstract Syntax Tree of each file",
+      "url": "https://github.com/MicroWebStacks/content-structure",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T06:11:55Z",
+    "node": {
+      "name": "astro-markdown-render",
+      "owner": {
+        "login": "MicroWebStacks"
+      },
+      "description": "render remote md content with help of mdast",
+      "url": "https://github.com/MicroWebStacks/astro-markdown-render",
+      "primaryLanguage": {
+        "name": "Astro"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T05:29:54Z",
+    "node": {
+      "name": "worker",
+      "owner": {
+        "login": "astro-community"
+      },
+      "description": "Use Web Workers in Astro",
+      "url": "https://github.com/astro-community/worker",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T05:10:00Z",
+    "node": {
+      "name": "storyblok-astro",
+      "owner": {
+        "login": "storyblok"
+      },
+      "description": "Astro SDK for Storyblok CMS",
+      "url": "https://github.com/storyblok/storyblok-astro",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T04:53:49Z",
+    "node": {
+      "name": "solid-zustand",
+      "owner": {
+        "login": "wobsoriano"
+      },
+      "description": "🐻 State management in Solid using zustand.",
+      "url": "https://github.com/wobsoriano/solid-zustand",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T02:42:36Z",
+    "node": {
+      "name": "Leaflet.RoughCanvas",
+      "owner": {
+        "login": "zhuang-hao-ming"
+      },
+      "description": "Leaflet.RoughCanvas is a plugin for render hand-drawn style vector map on leaflet.",
+      "url": "https://github.com/zhuang-hao-ming/Leaflet.RoughCanvas",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T02:41:49Z",
+    "node": {
+      "name": "Leaflet.MakiMarkers",
+      "owner": {
+        "login": "jseppi"
+      },
+      "description": "Leaflet plugin to create map icons using Maki Icons from Mapbox.",
+      "url": "https://github.com/jseppi/Leaflet.MakiMarkers",
+      "primaryLanguage": {
+        "name": "HTML"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T02:40:54Z",
+    "node": {
+      "name": "Leaflet.Geodesic",
+      "owner": {
+        "login": "henrythasler"
+      },
+      "description": "Add-on to draw geodesic lines with leaflet",
+      "url": "https://github.com/henrythasler/Leaflet.Geodesic",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T02:40:07Z",
+    "node": {
+      "name": "Leaflet.CustomLayer",
+      "owner": {
+        "login": "iDerekLi"
+      },
+      "description": "Leaflet overlay plugin: L.CustomLayer - fully custom Layer.",
+      "url": "https://github.com/iDerekLi/Leaflet.CustomLayer",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-10T02:30:21Z",
+    "node": {
+      "name": "L.Donut",
+      "owner": {
+        "login": "Falke-Design"
+      },
+      "description": "A Leaflet Plugin which adds the shape L.Donut. Extension of L.Circle which allows to define a outer and inner radius.",
+      "url": "https://github.com/Falke-Design/L.Donut",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T18:37:18Z",
+    "node": {
+      "name": "topojson-simplify",
+      "owner": {
+        "login": "topojson"
+      },
+      "description": "Filter and simplify geometries while preserving topology for smaller files and faster rendering!",
+      "url": "https://github.com/topojson/topojson-simplify",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T06:35:17Z",
+    "node": {
+      "name": "econ-scraper",
+      "owner": {
+        "login": "thecityny"
+      },
+      "description": null,
+      "url": "https://github.com/thecityny/econ-scraper",
+      "primaryLanguage": {
+        "name": "Jupyter Notebook"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T06:33:52Z",
+    "node": {
+      "name": "reuters-style",
+      "owner": {
+        "login": "palewire"
+      },
+      "description": "A Python library format dates, numbers and text to conform with the Reuters Style Guide, the standards that guide the world's largest independent newsroom",
+      "url": "https://github.com/palewire/reuters-style",
+      "primaryLanguage": {
+        "name": "Python"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T06:31:17Z",
+    "node": {
+      "name": "nyc-open-data-monitor",
+      "owner": {
+        "login": "palewire"
+      },
+      "description": "Automated monitoring of new and updated datasets posted to New York City's data portal",
+      "url": "https://github.com/palewire/nyc-open-data-monitor",
+      "primaryLanguage": {
+        "name": "Python"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T04:34:45Z",
+    "node": {
+      "name": "Leaflet.toolbar",
+      "owner": {
+        "login": "Leaflet"
+      },
+      "description": "Flexible, extensible toolbars for Leaflet maps.",
+      "url": "https://github.com/Leaflet/Leaflet.toolbar",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T04:32:40Z",
+    "node": {
+      "name": "Leaflet.DistortableImage",
+      "owner": {
+        "login": "Karelics"
+      },
+      "description": "A Leaflet extension to distort or \"rubber sheet\" images",
+      "url": "https://github.com/Karelics/Leaflet.DistortableImage",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T03:46:07Z",
+    "node": {
+      "name": "openstreetmap-carto",
+      "owner": {
+        "login": "gravitystorm"
+      },
+      "description": "A general-purpose OpenStreetMap mapnik style, in CartoCSS",
+      "url": "https://github.com/gravitystorm/openstreetmap-carto",
+      "primaryLanguage": {
+        "name": "CartoCSS"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T03:20:58Z",
+    "node": {
+      "name": "immer",
+      "owner": {
+        "login": "immerjs"
+      },
+      "description": "Create the next immutable state by mutating the current one",
+      "url": "https://github.com/immerjs/immer",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T03:17:14Z",
+    "node": {
+      "name": "react-art",
+      "owner": {
+        "login": "reactjs"
+      },
+      "description": "React Bridge to the ART Drawing Library",
+      "url": "https://github.com/reactjs/react-art",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T03:12:46Z",
+    "node": {
+      "name": "blog-astro-react-zustand-shared-state",
+      "owner": {
+        "login": "firxworx"
+      },
+      "description": null,
+      "url": "https://github.com/firxworx/blog-astro-react-zustand-shared-state",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T03:01:28Z",
+    "node": {
+      "name": "zustand",
+      "owner": {
+        "login": "pmndrs"
+      },
+      "description": "🐻 Bear necessities for state management in React",
+      "url": "https://github.com/pmndrs/zustand",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T03:01:20Z",
+    "node": {
+      "name": "jotai",
+      "owner": {
+        "login": "pmndrs"
+      },
+      "description": "👻 Primitive and flexible state management for React",
+      "url": "https://github.com/pmndrs/jotai",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T02:58:21Z",
+    "node": {
+      "name": "turf",
+      "owner": {
+        "login": "Turfjs"
+      },
+      "description": "A modular geospatial engine written in JavaScript and TypeScript",
+      "url": "https://github.com/Turfjs/turf",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T02:55:31Z",
+    "node": {
+      "name": "maps-withastro",
+      "owner": {
+        "login": "roblabs"
+      },
+      "description": "Bring Leaflet & MapLibre maps directly into Astro",
+      "url": "https://github.com/roblabs/maps-withastro",
+      "primaryLanguage": {
+        "name": "Astro"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T02:44:20Z",
+    "node": {
+      "name": "maplibre-geoman",
+      "owner": {
+        "login": "geoman-io"
+      },
+      "description": "🍂🗺️ The most powerful MapLibre / Mapbox plugin for drawing and editing geometry layers",
+      "url": "https://github.com/geoman-io/maplibre-geoman",
+      "primaryLanguage": null
+    }
+  },
+  {
+    "starredAt": "2024-12-09T02:43:16Z",
+    "node": {
+      "name": "awesome-maplibre",
+      "owner": {
+        "login": "maplibre"
+      },
+      "description": "A collection of awesome things that use or support MapLibre!",
+      "url": "https://github.com/maplibre/awesome-maplibre",
+      "primaryLanguage": null
+    }
+  },
+  {
+    "starredAt": "2024-12-09T02:39:00Z",
+    "node": {
+      "name": "flatgeobuf",
+      "owner": {
+        "login": "flatgeobuf"
+      },
+      "description": "A performant binary encoding for geographic data based on flatbuffers",
+      "url": "https://github.com/flatgeobuf/flatgeobuf",
+      "primaryLanguage": {
+        "name": "Rust"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T02:37:06Z",
+    "node": {
+      "name": "basemaps",
+      "owner": {
+        "login": "protomaps"
+      },
+      "description": "Basemap PMTiles generation and cartographic styles for OpenStreetMap data and more",
+      "url": "https://github.com/protomaps/basemaps",
+      "primaryLanguage": {
+        "name": "Java"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T02:31:16Z",
+    "node": {
+      "name": "tippecanoe",
+      "owner": {
+        "login": "felt"
+      },
+      "description": "Build vector tilesets from large collections of GeoJSON features.",
+      "url": "https://github.com/felt/tippecanoe",
+      "primaryLanguage": {
+        "name": "C++"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T02:10:38Z",
+    "node": {
+      "name": "ai2svelte",
+      "owner": {
+        "login": "reuters-graphics"
+      },
+      "description": null,
+      "url": "https://github.com/reuters-graphics/ai2svelte",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T00:34:04Z",
+    "node": {
+      "name": "kothic-js",
+      "owner": {
+        "login": "kothic"
+      },
+      "description": "Kothic JS — a full-featured JavaScript map rendering engine using HTML5 Canvas",
+      "url": "https://github.com/kothic/kothic-js",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T00:32:56Z",
+    "node": {
+      "name": "tangram",
+      "owner": {
+        "login": "tangrams"
+      },
+      "description": "WebGL map rendering engine for creative cartography",
+      "url": "https://github.com/tangrams/tangram",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T00:30:32Z",
+    "node": {
+      "name": "Leaflet.VectorGrid",
+      "owner": {
+        "login": "Leaflet"
+      },
+      "description": "Display gridded vector data (sliced GeoJSON or protobuf vector tiles) in Leaflet 1.0.0",
+      "url": "https://github.com/Leaflet/Leaflet.VectorGrid",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T00:24:41Z",
+    "node": {
+      "name": "protomaps-leaflet",
+      "owner": {
+        "login": "protomaps"
+      },
+      "description": "Lightweight vector map rendering + labeling and symbology for Leaflet",
+      "url": "https://github.com/protomaps/protomaps-leaflet",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T00:24:36Z",
+    "node": {
+      "name": "PMTiles",
+      "owner": {
+        "login": "protomaps"
+      },
+      "description": "Cloud-optimized + compressed single-file tile archives for vector and raster maps",
+      "url": "https://github.com/protomaps/PMTiles",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T00:18:04Z",
+    "node": {
+      "name": "dailygraphics",
+      "owner": {
+        "login": "nprapps"
+      },
+      "description": "NPR Visuals' rig for deploying daily graphics projects in responsive iframes.",
+      "url": "https://github.com/nprapps/dailygraphics",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T00:13:41Z",
+    "node": {
+      "name": "chart-module-spike-map",
+      "owner": {
+        "login": "reuters-graphics"
+      },
+      "description": null,
+      "url": "https://github.com/reuters-graphics/chart-module-spike-map",
+      "primaryLanguage": {
+        "name": "Svelte"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T00:12:52Z",
+    "node": {
+      "name": "chart-module-parliament-chart",
+      "owner": {
+        "login": "reuters-graphics"
+      },
+      "description": null,
+      "url": "https://github.com/reuters-graphics/chart-module-parliament-chart",
+      "primaryLanguage": {
+        "name": "Svelte"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T00:12:33Z",
+    "node": {
+      "name": "chart-module-us-county-map-new",
+      "owner": {
+        "login": "reuters-graphics"
+      },
+      "description": null,
+      "url": "https://github.com/reuters-graphics/chart-module-us-county-map-new",
+      "primaryLanguage": {
+        "name": "Svelte"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-09T00:12:26Z",
+    "node": {
+      "name": "awesome-charts",
+      "owner": {
+        "login": "reuters-graphics"
+      },
+      "description": "An awesome list of reusable chart modules created by the Reuters graphics team",
+      "url": "https://github.com/reuters-graphics/awesome-charts",
+      "primaryLanguage": null
+    }
+  },
+  {
+    "starredAt": "2024-12-09T00:08:54Z",
+    "node": {
+      "name": "bluprint_graphics-kit",
+      "owner": {
+        "login": "reuters-graphics"
+      },
+      "description": "SvelteKit rig for graphics and newsapps",
+      "url": "https://github.com/reuters-graphics/bluprint_graphics-kit",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T23:26:05Z",
+    "node": {
+      "name": "california-2016-election-precinct-maps",
+      "owner": {
+        "login": "datadesk"
+      },
+      "description": "Precinct-level results for the 2016 general election in California",
+      "url": "https://github.com/datadesk/california-2016-election-precinct-maps",
+      "primaryLanguage": {
+        "name": "Python"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T23:05:55Z",
+    "node": {
+      "name": "shapefile",
+      "owner": {
+        "login": "mbostock"
+      },
+      "description": "A cross-platform streaming parser for the ESRI Shapefile spatial data format.",
+      "url": "https://github.com/mbostock/shapefile",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T23:03:05Z",
+    "node": {
+      "name": "california-counties",
+      "owner": {
+        "login": "scottpham"
+      },
+      "description": "California Counties in TopoJSON",
+      "url": "https://github.com/scottpham/california-counties",
+      "primaryLanguage": null
+    }
+  },
+  {
+    "starredAt": "2024-12-08T22:51:35Z",
+    "node": {
+      "name": "observable-framework-cpi-example",
+      "owner": {
+        "login": "palewire"
+      },
+      "description": "A demonstration of how to deploy an Observable Framework dashboard via GitHub Pages.",
+      "url": "https://github.com/palewire/observable-framework-cpi-example",
+      "primaryLanguage": {
+        "name": "Python"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T22:25:55Z",
+    "node": {
+      "name": "topojson",
+      "owner": {
+        "login": "topojson"
+      },
+      "description": "An extension of GeoJSON that encodes topology! 🌐",
+      "url": "https://github.com/topojson/topojson",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T22:25:43Z",
+    "node": {
+      "name": "topojson-client",
+      "owner": {
+        "login": "topojson"
+      },
+      "description": "Manipulate TopoJSON, such as to merge shapes, and convert it back to GeoJSON.",
+      "url": "https://github.com/topojson/topojson-client",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T22:21:50Z",
+    "node": {
+      "name": "us-atlas",
+      "owner": {
+        "login": "topojson"
+      },
+      "description": "Pre-built TopoJSON from the U.S. Census Bureau.",
+      "url": "https://github.com/topojson/us-atlas",
+      "primaryLanguage": {
+        "name": "Shell"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T22:19:21Z",
+    "node": {
+      "name": "california-topojson-atlas",
+      "owner": {
+        "login": "datadesk"
+      },
+      "description": "Simple maps of California's 58 counties",
+      "url": "https://github.com/datadesk/california-topojson-atlas",
+      "primaryLanguage": {
+        "name": "HTML"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T21:15:16Z",
+    "node": {
+      "name": "react-map-gl",
+      "owner": {
+        "login": "visgl"
+      },
+      "description": "React friendly API wrapper around MapboxGL JS",
+      "url": "https://github.com/visgl/react-map-gl",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T21:09:36Z",
+    "node": {
+      "name": "swiss-maps",
+      "owner": {
+        "login": "interactivethings"
+      },
+      "description": "Swiss geodata as TopoJSON",
+      "url": "https://github.com/interactivethings/swiss-maps",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T21:08:27Z",
+    "node": {
+      "name": "historical-world-atlas",
+      "owner": {
+        "login": "interactivethings"
+      },
+      "description": "World TopoJSON data from 2000 BC until today",
+      "url": "https://github.com/interactivethings/historical-world-atlas",
+      "primaryLanguage": null
+    }
+  },
+  {
+    "starredAt": "2024-12-08T20:49:47Z",
+    "node": {
+      "name": "dataflow",
+      "owner": {
+        "login": "asg017"
+      },
+      "description": "An experimental self-hosted Observable notebook editor, with support for FileAttachments, Secrets, custom standard libraries, and more!",
+      "url": "https://github.com/asg017/dataflow",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T17:36:44Z",
+    "node": {
+      "name": "dynosaur",
+      "owner": {
+        "login": "spastorino"
+      },
+      "description": null,
+      "url": "https://github.com/spastorino/dynosaur",
+      "primaryLanguage": {
+        "name": "Rust"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T17:34:04Z",
+    "node": {
+      "name": "RenderNurse",
+      "owner": {
+        "login": "neoforged"
+      },
+      "description": "RenderDoc Launch handler for Minecraft",
+      "url": "https://github.com/neoforged/RenderNurse",
+      "primaryLanguage": {
+        "name": "Java"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T17:29:24Z",
+    "node": {
+      "name": "verso",
+      "owner": {
+        "login": "versotile-org"
+      },
+      "description": "A web browser that plays old world blues to build new world hope",
+      "url": "https://github.com/versotile-org/verso",
+      "primaryLanguage": {
+        "name": "Rust"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T06:36:12Z",
+    "node": {
+      "name": "Leaflet.Clipper",
+      "owner": {
+        "login": "willfarrell"
+      },
+      "description": "Allows Union, Difference, Xor, and Intersection operations on two polygons.",
+      "url": "https://github.com/willfarrell/Leaflet.Clipper",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T06:30:45Z",
+    "node": {
+      "name": "leaflet-geoman",
+      "owner": {
+        "login": "geoman-io"
+      },
+      "description": "🍂🗺️ The most powerful leaflet plugin for drawing and editing geometry layers",
+      "url": "https://github.com/geoman-io/leaflet-geoman",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T06:11:56Z",
+    "node": {
+      "name": "react-leaflet-select-area",
+      "owner": {
+        "login": "nirajmohanrana"
+      },
+      "description": "A simple React component for selecting an area on a Leaflet map.",
+      "url": "https://github.com/nirajmohanrana/react-leaflet-select-area",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T06:07:26Z",
+    "node": {
+      "name": "react-leaflet",
+      "owner": {
+        "login": "PaulLeCam"
+      },
+      "description": "React components for Leaflet maps",
+      "url": "https://github.com/PaulLeCam/react-leaflet",
+      "primaryLanguage": {
+        "name": "TypeScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T06:07:07Z",
+    "node": {
+      "name": "Leaflet",
+      "owner": {
+        "login": "Leaflet"
+      },
+      "description": "🍃 JavaScript library for mobile-friendly interactive maps 🇺🇦",
+      "url": "https://github.com/Leaflet/Leaflet",
+      "primaryLanguage": {
+        "name": "JavaScript"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T05:46:12Z",
+    "node": {
+      "name": "open-street-data",
+      "owner": {
+        "login": "dagnelies"
+      },
+      "description": "Country data extracts from OpenStreetMaps in GeoJson or PBF. Datasets of streets, houses, addresses and more.",
+      "url": "https://github.com/dagnelies/open-street-data",
+      "primaryLanguage": {
+        "name": "Jupyter Notebook"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T04:42:01Z",
+    "node": {
+      "name": "mozjs",
+      "owner": {
+        "login": "servo"
+      },
+      "description": "Servo's SpiderMonkey fork",
+      "url": "https://github.com/servo/mozjs",
+      "primaryLanguage": {
+        "name": "Rust"
+      }
+    }
+  },
+  {
+    "starredAt": "2024-12-08T04:41:36Z",
+    "node": {
+      "name": "mozangle",
+      "owner": {
+        "login": "servo"
+      },
+      "description": "Mozilla’s fork of Google ANGLE, repackaged as a Rust crate",
+      "url": "https://github.com/servo/mozangle",
+      "primaryLanguage": {
+        "name": "C++"
+      }
+    }
+  }
+]

@@ -2,12 +2,8 @@
 import Layout from "@/layouts/Layout.astro";
 import "@/index.css";
 import Page from "@/components/Page";
-import BlockCalendar from "@/components/BlockCalendar";
-
-import cachedPhase from "@/assets/cached/phase.json";
 ---
 
 <Layout>
-    <!-- <Page client:load /> -->
-    <BlockCalendar starredRepos={cachedPhase} client:load />
+    <Page client:load />
 </Layout>

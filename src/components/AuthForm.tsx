@@ -11,6 +11,11 @@ export default function AuthForm() {
 
   useEffect(() => {
     const storedToken = localStorage.getItem("githubToken");
+    const storedUsername = localStorage.getItem("githubUsername");
+
+    if (storedUsername) {
+      setUsername(storedUsername);
+    }
     if (storedToken) {
       setToken(storedToken);
     }
@@ -20,11 +25,10 @@ export default function AuthForm() {
     e.preventDefault();
     localStorage.setItem("githubToken", token);
     localStorage.setItem("githubUsername", username);
-    window.location.reload();
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 mb-8">
+    <form onSubmit={handleSubmit} className="space-y-4 mb-8 max-w-xs">
       <div>
         <Label htmlFor="token">GitHub API Token</Label>
         <Input
@@ -47,7 +51,7 @@ export default function AuthForm() {
           required
         />
       </div>
-      <Button type="submit">Submit</Button>
+      <Button type="submit">Scrape Stars</Button>
     </form>
   );
 }

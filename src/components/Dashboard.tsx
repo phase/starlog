@@ -8,12 +8,13 @@ import { GraphQLClient } from "graphql-request";
 import fetchStarredRepositories, {
   type StarredRepository,
 } from "@/github/stars";
+import cachedPhase from "@/assets/data/phase.json";
 
 export default function Dashboard() {
-  const [starredRepos, setStarredRepos] = useState<StarredRepository[]>([]);
+  const [starredRepos, setStarredRepos] =
+    useState<StarredRepository[]>(cachedPhase);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
   useEffect(() => {
     const fetchStarredRepos = async () => {
       const token = localStorage.getItem("githubToken");
@@ -24,20 +25,29 @@ export default function Dashboard() {
         setLoading(false);
         return;
       }
-
-      console.log("creating graphql client with token", token);
-
-      const client = new GraphQLClient("https://api.github.com/graphql", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
       try {
-        const repos = await fetchStarredRepositories(client, username, 1);
-        setStarredRepos((prev) => {
-          return repos;
+        // First try to fetch from cached JSON
+        const response = await fetch(`/cached/${username}.json`);
+
+        if (response.ok) {
+          const cachedRepos = await response.json();
+          console.log(`using cache for ${username}`);
+          setStarredRepos(cachedRepos);
+          setLoading(false);
+          return;
+        }
+
+        // If no cached data, fetch from GitHub API
+        console.log("creating graphql client with token", token);
+
+        const client = new GraphQLClient("https://api.github.com/graphql", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         });
+
+        const repos = await fetchStarredRepositories(client, username, 1);
+        setStarredRepos(repos);
         setLoading(false);
       } catch (err) {
         setError("Error fetching starred repositories");
@@ -49,7 +59,18 @@ export default function Dashboard() {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="space-y-8">
+        <Card>
+          <CardHeader>
+            <CardTitle>Example GitHub Stars Calendar Heatmap</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <BlockCalendar starredRepos={cachedPhase} />
+          </CardContent>
+        </Card>
+      </div>
+    );
   }
 
   if (error) {
