@@ -64,6 +64,12 @@ function hslToString(h: number, s: number, l: number): string {
 
 export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
   const calendarData = useMemo(() => {
+    if (starredRepos === null || starredRepos.forEach === undefined) {
+      // bad input
+      console.log(`invalid input: ${starredRepos}`);
+      return {};
+    }
+
     const data: { [key: string]: StarredRepository[] } = {};
     starredRepos.forEach((repo) => {
       const date = repo.starredAt.split("T")[0];
