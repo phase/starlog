@@ -162,3 +162,62 @@ export function getYearTotal(
     .filter(([date]) => date.startsWith(year))
     .reduce((total, [, repos]) => total + repos.length, 0);
 }
+
+export function getFavoriteUsersForYear(
+  calendarData: { [key: string]: StarredRepository[] },
+  year: string,
+): [string, number][] {
+  const userCounts: { [key: string]: number } = {};
+  Object.entries(calendarData).forEach(([date, repos]) => {
+    if (date.startsWith(year)) {
+      repos.forEach((repo) => {
+        const owner = repo.node.owner.login;
+        userCounts[owner] = (userCounts[owner] || 0) + 1;
+      });
+    }
+  });
+
+  return Object.entries(userCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5);
+}
+
+export function getOverallStats(calendarData: {
+  [key: string]: StarredRepository[];
+}): {
+  totalStars: number;
+  totalLanguages: number;
+  topLanguages: [string, number][];
+  topUsers: [string, number][];
+} {
+  const languageCounts: { [key: string]: number } = {};
+  const userCounts: { [key: string]: number } = {};
+  let totalStars = 0;
+
+  Object.values(calendarData).forEach((repos) => {
+    totalStars += repos.length;
+    repos.forEach((repo) => {
+      const language = repo.node.primaryLanguage?.name;
+      if (language) {
+        languageCounts[language] = (languageCounts[language] || 0) + 1;
+      }
+      const owner = repo.node.owner.login;
+      userCounts[owner] = (userCounts[owner] || 0) + 1;
+    });
+  });
+
+  const topLanguages = Object.entries(languageCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10);
+
+  const topUsers = Object.entries(userCounts)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 10);
+
+  return {
+    totalStars,
+    totalLanguages: Object.keys(languageCounts).length,
+    topLanguages,
+    topUsers,
+  };
+}

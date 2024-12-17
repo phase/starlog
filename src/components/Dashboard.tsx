@@ -3,7 +3,6 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import BlockCalendar from "@/components/BlockCalendar";
-import Rankings from "@/components/Rankings";
 import { GraphQLClient } from "graphql-request";
 import fetchStarredRepositories, {
   type StarredRepository,
@@ -134,14 +133,6 @@ export default function Dashboard() {
         </CardHeader>
         <CardContent>
           <BlockCalendar starredRepos={starredRepos} />
-        </CardContent>
-      </Card>
-      <Card>
-        <CardHeader>
-          <CardTitle>Repository Rankings</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <Rankings starredRepos={starredRepos} />
         </CardContent>
       </Card>
     </div>
