@@ -6,6 +6,7 @@ import {
   DAYS,
   MONTHS,
   getTopLanguagesForYear,
+  getNicheLanguagesForYear,
   getMonthTotal,
   getYearTotal,
 } from "@/utils/calendarUtils";
@@ -73,6 +74,26 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
                   {lang} ({count})
                 </span>
               ),
+            )}
+            {getNicheLanguagesForYear(calendarData, year).length >= 2 && (
+              <div className="text-xs text-gray-500 mb-4">
+                Niche languages:{" "}
+                {getNicheLanguagesForYear(calendarData, year).map(
+                  ([lang, count], index) => (
+                    <span key={lang}>
+                      {index > 0 && ", "}
+                      <span
+                        className="inline-block w-2 h-2 rounded-full mr-1"
+                        style={{
+                          backgroundColor:
+                            LANGUAGE_COLORS[lang] || LANGUAGE_COLORS.default,
+                        }}
+                      ></span>
+                      {lang} ({count})
+                    </span>
+                  ),
+                )}
+              </div>
             )}
           </div>
           <div className="flex">

@@ -29,10 +29,6 @@ const formatTooltipContent = (
   dateString: string,
   repos: StarredRepository[],
 ): JSX.Element => {
-  const languageCounts = getLanguagesForDay(repos);
-  const sortedLanguages = Object.entries(languageCounts).sort(
-    (a, b) => b[1] - a[1],
-  );
   const formattedDate = new Date(dateString).toLocaleDateString("en-US", {
     weekday: "long",
     year: "numeric",
@@ -43,18 +39,30 @@ const formatTooltipContent = (
   return (
     <div className="p-2 max-w-xs">
       <div className="font-bold mb-1">{formattedDate}</div>
-      <div className="mb-2">Total stars: {repos.length}</div>
-      <ul className="space-y-1">
-        {sortedLanguages.map(([lang, count]) => (
-          <li key={lang} className="flex items-center">
+      <div className="mb-2">{repos.length} stars</div>
+      <ul className="space-y-1 text-sm">
+        {repos.map((repo, index) => (
+          <li key={index} className="flex items-center">
             <span
-              className="w-3 h-3 rounded-full mr-2"
+              className="w-3 h-3 rounded-full mr-2 flex-shrink-0"
               style={{
                 backgroundColor:
-                  LANGUAGE_COLORS[lang] || LANGUAGE_COLORS.default,
+                  LANGUAGE_COLORS[
+                    repo.node.primaryLanguage?.name || "default"
+                  ] || LANGUAGE_COLORS.default,
               }}
             ></span>
-            {lang}: {count}
+            <a
+              href={repo.node.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="truncate text-blue-500 hover:underline"
+            >
+              {repo.node.owner.login}/{repo.node.name}
+            </a>
+            <span className="text-gray-500 ml-1">
+              ({repo.node.primaryLanguage?.name || "Unknown"})
+            </span>
           </li>
         ))}
       </ul>
@@ -71,8 +79,15 @@ const getColor = (
     return NO_DATA_COLOR;
   }
 
-  const languageCounts = getLanguagesForDay(repos);
-  const mostPopularLanguage = getMostPopularLanguage(languageCounts);
+  const languageCounts: { [key: string]: number } = {};
+  repos.forEach((repo) => {
+    const language = repo.node.primaryLanguage?.name || "Unknown";
+    languageCounts[language] = (languageCounts[language] || 0) + 1;
+  });
+
+  const mostPopularLanguage = Object.entries(languageCounts).sort(
+    (a, b) => b[1] - a[1],
+  )[0][0];
   const baseColor =
     LANGUAGE_COLORS[mostPopularLanguage] || LANGUAGE_COLORS.default;
   const [h, s, l] = hexToHSL(baseColor);
@@ -120,6 +135,21 @@ export const MonthSVG: React.FC<MonthSVGProps> = ({
 
         const dateString = date.toISOString().split("T")[0];
         const repos = calendarData[dateString] || [];
+
+        if (repos.length === 0) {
+          return (
+            <rect
+              key={dateString}
+              x={Math.floor(index / 7) * (cellSize + gapSize)}
+              y={(index % 7) * (cellSize + gapSize)}
+              width={cellSize}
+              height={cellSize}
+              fill={NO_DATA_COLOR}
+              rx={2}
+              ry={2}
+            />
+          );
+        }
 
         return (
           <Tooltip.Provider

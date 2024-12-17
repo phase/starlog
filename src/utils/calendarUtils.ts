@@ -112,6 +112,36 @@ export function getTopLanguagesForYear(
     .slice(0, 5);
 }
 
+export function getNicheLanguagesForYear(
+  calendarData: { [key: string]: StarredRepository[] },
+  year: string,
+): [string, number][] {
+  const languageCounts: { [key: string]: number } = {};
+  Object.entries(calendarData).forEach(([date, repos]) => {
+    if (date.startsWith(year)) {
+      repos.forEach((repo) => {
+        const language = repo.node.primaryLanguage?.name || "Unknown";
+        languageCounts[language] = (languageCounts[language] || 0) + 1;
+      });
+    }
+  });
+
+  const topLanguages = new Set(
+    getTopLanguagesForYear(calendarData, year).map(([lang]) => lang),
+  );
+
+  return Object.entries(languageCounts)
+    .filter(
+      ([lang, count]) =>
+        count > 10 &&
+        count < 40 &&
+        !topLanguages.has(lang) &&
+        lang !== "Unknown",
+    )
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5);
+}
+
 export function getMonthTotal(
   calendarData: { [key: string]: StarredRepository[] },
   year: number,
