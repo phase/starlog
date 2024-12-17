@@ -103,6 +103,7 @@ export default async function fetchStarredRepositories(
 
 // Example usage
 async function main() {
+  const username = "phase";
   console.log("Starting...");
   const client = new GraphQLClient("https://api.github.com/graphql", {
     headers: {
@@ -112,7 +113,7 @@ async function main() {
 
   try {
     // Only fetch first 2 pages
-    const starredRepos = await fetchStarredRepositories(client, "phase");
+    const starredRepos = await fetchStarredRepositories(client, username);
 
     console.log(`Total starred repositories: ${starredRepos.length}`);
 
@@ -126,12 +127,10 @@ async function main() {
     });
 
     // Write full results to file
+    const fileName = `public/cached/${username}.json`;
     const fs = require("fs");
-    fs.writeFileSync(
-      "starred-repos.json",
-      JSON.stringify(starredRepos, null, 2),
-    );
-    console.log("\nWrote full results to starred-repos.json");
+    fs.writeFileSync(fileName, JSON.stringify(starredRepos, null, 2));
+    console.log(`\nWrote full results to ${fileName}`);
   } catch (error) {
     console.error("Failed to fetch starred repositories", error);
   }
