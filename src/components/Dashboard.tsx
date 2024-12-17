@@ -61,15 +61,13 @@ export default function Dashboard() {
 
         if (token !== "" && token !== "token") {
           // If no cached data, fetch from GitHub API
-          console.log("creating graphql client with token", token);
-
           const client = new GraphQLClient("https://api.github.com/graphql", {
             headers: {
               Authorization: `Bearer ${token}`,
             },
           });
 
-          const repos = await fetchStarredRepositories(client, username, 1);
+          const repos = await fetchStarredRepositories(client, username, 50);
 
           setError(null);
           setStarredRepos(repos);

@@ -133,12 +133,12 @@ export function getNicheLanguagesForYear(
   return Object.entries(languageCounts)
     .filter(
       ([lang, count]) =>
-        count > 10 &&
+        count > 3 &&
         count < 40 &&
         !topLanguages.has(lang) &&
         lang !== "Unknown",
     )
-    .sort((a, b) => b[1] - a[1])
+    .sort((a, b) => a[1] - b[1])
     .slice(0, 5);
 }
 
@@ -207,12 +207,14 @@ export function getOverallStats(calendarData: {
   });
 
   const topLanguages = Object.entries(languageCounts)
+    .filter(([language, count]) => count > 3)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 10);
+    .slice(0, 40);
 
   const topUsers = Object.entries(userCounts)
+    .filter(([username, count]) => count > 3)
     .sort((a, b) => b[1] - a[1])
-    .slice(0, 10);
+    .slice(0, 40);
 
   return {
     totalStars,

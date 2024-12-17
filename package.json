@@ -6,7 +6,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "following": "bun run ./src/github/scripts/genFollowing.ts",
+    "stars": "bun run ./src/github/scripts/genStars.ts",
+    "languages": "bun run ./src/github/languages.ts"
   },
   "dependencies": {
     "@astrojs/react": "^4.1.0",

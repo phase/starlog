@@ -176,10 +176,32 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
           <span className="font-semibold">{overallStats.totalLanguages}</span>{" "}
           languages.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
             <div className="text-sm mb-4">
               <p className="mb-1 font-semibold">Favorite Languages</p>
+              <ul className="list-disc list-inside">
+                {overallStats.topLanguages
+                  .splice(0, overallStats.topLanguages.length / 2)
+                  .map(([lang, count]) => (
+                    <li key={lang} className="flex items-center">
+                      <span
+                        className="inline-block w-2 h-2 rounded-full mr-2"
+                        style={{
+                          backgroundColor:
+                            LANGUAGE_COLORS[lang] || LANGUAGE_COLORS.default,
+                        }}
+                      ></span>
+                      {lang}
+                      <span className="text-gray-400 ml-1">({count})</span>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div className="text-sm mb-4">
+              <p className="mb-1 font-semibold">&nbsp;</p>
               <ul className="list-disc list-inside">
                 {overallStats.topLanguages.map(([lang, count]) => (
                   <li key={lang} className="flex items-center">
@@ -200,6 +222,28 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
           <div>
             <div className="text-sm">
               <p className="mb-1 font-semibold">Favorite Users</p>
+              <ul className="list-disc list-inside">
+                {overallStats.topUsers
+                  .splice(0, overallStats.topUsers.length / 2)
+                  .map(([user, count]) => (
+                    <li key={user}>
+                      <a
+                        href={`https://github.com/${user}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:underline"
+                      >
+                        {user}
+                      </a>
+                      <span className="text-gray-400 ml-1">({count})</span>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          </div>
+          <div>
+            <div className="text-sm">
+              <p className="mb-1 font-semibold">&nbsp;</p>
               <ul className="list-disc list-inside">
                 {overallStats.topUsers.map(([user, count]) => (
                   <li key={user}>

@@ -1,8 +1,5 @@
 import { GraphQLClient } from "graphql-request";
 
-/// is this being run with `bun run`?
-const isMain = typeof Bun !== "undefined" && import.meta.path === Bun.main;
-
 export interface StarredRepository {
   starredAt: string;
   node: {
@@ -99,45 +96,4 @@ export default async function fetchStarredRepositories(
     console.error("Error fetching starred repositories:", error);
     throw error;
   }
-}
-
-// Example usage
-async function main() {
-  const username = "phase";
-  console.log("Starting...");
-  const client = new GraphQLClient("https://api.github.com/graphql", {
-    headers: {
-      Authorization: `Bearer GAAA`,
-    },
-  });
-
-  try {
-    // Only fetch first 2 pages
-    const starredRepos = await fetchStarredRepositories(client, username);
-
-    console.log(`Total starred repositories: ${starredRepos.length}`);
-
-    // Optional: Log some details about the first few repositories
-    starredRepos.slice(0, 5).forEach((repo) => {
-      console.log(`
-        Name: ${repo.node.name}
-        Owner: ${repo.node.owner.login}
-        Starred At: ${repo.starredAt}
-      `);
-    });
-
-    // Write full results to file
-    const fileName = `public/cached/${username}.json`;
-    const fs = require("fs");
-    fs.writeFileSync(fileName, JSON.stringify(starredRepos, null, 2));
-    console.log(`\nWrote full results to ${fileName}`);
-  } catch (error) {
-    console.error("Failed to fetch starred repositories", error);
-  }
-}
-
-if (isMain) {
-  await main();
-} else {
-  // this file is being imported from another script
 }
