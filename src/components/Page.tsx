@@ -4,8 +4,29 @@ import Dashboard from "@/components/Dashboard";
 export default function Page() {
   return (
     <div className="container mx-auto p-4" style={{ maxWidth: "850px" }}>
-      <h1 className="text-2xl font-bold mb-4">GitHub Stars</h1>
+      <div className="mb-4">
+        <h1 className="text-2xl font-bold tracking-tight">GitHub Stars</h1>
+        <p className="text-sm">
+          <span className="text-gray-700">A dashboard by</span>{" "}
+          <a
+            href="https://jadon.io"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-700 hover:underline"
+          >
+            Jadon
+          </a>
+          <span className="text-gray-700">.</span>
+        </p>
+      </div>
       <AuthForm />
+      <p className="mb-8 mt-1 text-gray-400 text-xs">
+        Runs clientside using{" "}
+        <a href="https://docs.github.com/en/graphql/guides/forming-calls-with-graphql">
+          GitHub's GraphQL API
+        </a>
+        .
+      </p>
       <Dashboard />
     </div>
   );

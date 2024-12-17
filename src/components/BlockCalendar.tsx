@@ -112,22 +112,20 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
               ))}
             </div>
             <div className="flex-1 overflow-x-auto">
-              <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+              <div className="grid xs:grid-cols-2 grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
                 {MONTHS.map((month, monthIndex) => (
                   <div
                     key={`${year}-${month}`}
                     className="flex flex-col items-center"
                   >
-                    <Suspense fallback={<div className="h-12"></div>}>
-                      <MonthSVG
-                        year={parseInt(year)}
-                        month={monthIndex}
-                        calendarData={calendarData}
-                        monthlyMaxStars={monthlyMaxStars}
-                        cellSize={cellSize}
-                        gapSize={gapSize}
-                      />
-                    </Suspense>
+                    <MonthSVG
+                      year={parseInt(year)}
+                      month={monthIndex}
+                      calendarData={calendarData}
+                      monthlyMaxStars={monthlyMaxStars}
+                      cellSize={cellSize}
+                      gapSize={gapSize}
+                    />
                     <div className="text-xs text-center mt-1">
                       {month}
                       <span className="text-gray-400 ml-1">
@@ -178,7 +176,7 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
-            <div className="text-sm mb-4">
+            <div className="text-sm md:mb-4">
               <p className="mb-1 font-semibold">Favorite Languages</p>
               <ul className="list-disc list-inside">
                 {overallStats.topLanguages
@@ -201,7 +199,9 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
           </div>
           <div>
             <div className="text-sm mb-4">
-              <p className="mb-1 font-semibold">&nbsp;</p>
+              <p className="mb-1 font-semibold hidden sm:inline-block">
+                &nbsp;
+              </p>
               <ul className="list-disc list-inside">
                 {overallStats.topLanguages.map(([lang, count]) => (
                   <li key={lang} className="flex items-center">
@@ -243,7 +243,9 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
           </div>
           <div>
             <div className="text-sm">
-              <p className="mb-1 font-semibold">&nbsp;</p>
+              <p className="mb-1 font-semibold hidden sm:inline-block">
+                &nbsp;
+              </p>
               <ul className="list-disc list-inside">
                 {overallStats.topUsers.map(([user, count]) => (
                   <li key={user}>

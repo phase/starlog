@@ -10,6 +10,7 @@ import fetchStarredRepositories, {
 import cachedPhase from "@/assets/data/phase.json";
 import { useAtomValue } from "jotai";
 import { tokenAtom, usernameAtom } from "./state";
+import Search from "./Search";
 
 export default function Dashboard() {
   const token = useAtomValue(tokenAtom);
@@ -90,49 +91,26 @@ export default function Dashboard() {
     fetchStarredRepos();
   }, [username, token, setLoading, setError, setStarredRepos]);
 
-  if (loading) {
-    return (
+  const displayData = loading || error ? cachedPhase : starredRepos;
+
+  return (
+    <>
+      {error && <div className="text-red-500">{error}</div>}
+
+      <div>
+        <Search starredRepos={displayData} />
+      </div>
+
       <div className="space-y-8">
         <Card>
           <CardHeader>
-            <CardTitle>Example GitHub Stars Calendar Heatmap</CardTitle>
+            <CardTitle>Starred Repositories Calendar</CardTitle>
           </CardHeader>
           <CardContent>
-            <BlockCalendar starredRepos={cachedPhase} />
+            <BlockCalendar starredRepos={displayData} />
           </CardContent>
         </Card>
       </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <>
-        <div className="text-red-500">{error}</div>
-        <div className="space-y-8">
-          <Card>
-            <CardHeader>
-              <CardTitle>Example GitHub Stars Calendar Heatmap</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <BlockCalendar starredRepos={cachedPhase} />
-            </CardContent>
-          </Card>
-        </div>
-      </>
-    );
-  }
-
-  return (
-    <div className="space-y-8">
-      <Card>
-        <CardHeader>
-          <CardTitle>Starred Repositories Calendar</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <BlockCalendar starredRepos={starredRepos} />
-        </CardContent>
-      </Card>
-    </div>
+    </>
   );
 }

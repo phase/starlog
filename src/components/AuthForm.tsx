@@ -51,28 +51,32 @@ export default function AuthForm() {
   });
 
   return (
-    <form action={formAction} className="space-y-4 mb-8 max-w-xs">
-      <div>
-        <Label htmlFor="tokenInput">GitHub API Token</Label>
-        <Input
-          name="tokenInput"
-          type="password"
-          defaultValue={token}
-          placeholder="Enter your GitHub API token"
-          required
-        />
+    <form action={formAction} className="flex flex-row space-x-4">
+      <div className="flex flex-row space-x-2">
+        <div>
+          <Label htmlFor="tokenInput">GitHub API Token</Label>
+          <Input
+            name="tokenInput"
+            type="password"
+            defaultValue={token}
+            placeholder="Enter your GitHub API token"
+            required
+          />
+        </div>
+        <div>
+          <Label htmlFor="usernameInput">GitHub Username</Label>
+          <Input
+            name="usernameInput"
+            type="text"
+            defaultValue={username}
+            placeholder="Enter your GitHub username"
+            required
+          />
+        </div>
       </div>
-      <div>
-        <Label htmlFor="usernameInput">GitHub Username</Label>
-        <Input
-          name="usernameInput"
-          type="text"
-          defaultValue={username}
-          placeholder="Enter your GitHub username"
-          required
-        />
-      </div>
-      <Button type="submit">Scrape Stars</Button>
+      <Button type="submit" className="mt-6">
+        Scrape Stars
+      </Button>
     </form>
   );
 }
