@@ -38,6 +38,8 @@ export default function Search({ starredRepos }: SearchProps) {
           (repo.node.description &&
             repo.node.description.toLowerCase().includes(term.toLowerCase())) ||
           (repo.node.primaryLanguage &&
+            //@ts-ignore
+
             repo.node.primaryLanguage.name
               .toLowerCase()
               .includes(term.toLowerCase())),
@@ -99,6 +101,7 @@ export default function Search({ starredRepos }: SearchProps) {
                         className="w-2 h-2 rounded-full mr-1"
                         style={{
                           backgroundColor:
+                            //@ts-ignore
                             LANGUAGE_COLORS[repo.node.primaryLanguage.name] ||
                             LANGUAGE_COLORS.default,
                         }}

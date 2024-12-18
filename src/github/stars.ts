@@ -56,6 +56,47 @@ const STARRED_REPOS_QUERY = `
   }
 `;
 
+export async function fetchStarredRepositoriesStream(
+  consumer: (data: StarredRepository[]) => void,
+  client: GraphQLClient,
+  username: string,
+  maxIterations?: number,
+) {
+  let hasNextPage = true;
+  let cursor: string | null = null;
+  let iterations = 0;
+
+  try {
+    while (hasNextPage && (!maxIterations || iterations < maxIterations)) {
+      iterations++;
+      console.log(`Fetching page ${iterations}...`);
+
+      const data: StarredRepositoriesResponse =
+        await client.request<StarredRepositoriesResponse>(STARRED_REPOS_QUERY, {
+          username,
+          cursor,
+        });
+
+      const { edges, pageInfo } = data.user.starredRepositories;
+
+      console.log(`Got ${edges.length} repositories on this page`);
+
+      // Add current page's repositories to total list
+      consumer(edges);
+
+      // Update pagination info
+      hasNextPage = pageInfo.hasNextPage;
+      cursor = pageInfo.endCursor;
+    }
+
+    const earlyStop = hasNextPage ? " (stopped early)" : "";
+    console.log(`\nCompleted in ${iterations} iterations${earlyStop}`);
+  } catch (error) {
+    console.error("Error fetching starred repositories:", error);
+    throw error;
+  }
+}
+
 export default async function fetchStarredRepositories(
   client: GraphQLClient,
   username: string,

@@ -1,6 +1,24 @@
+import type { StarredRepository } from "@/github/stars";
+import cachedPhase from "@/assets/data/phase.json";
 import { atom } from "jotai";
 
-const usernameAtom = atom<string>("");
-const tokenAtom = atom<string>("");
+export const usernameAtom = atom<string>("");
+export const tokenAtom = atom<string>("");
 
-export { usernameAtom, tokenAtom };
+export const repoAtom = atom<StarredRepository[]>(cachedPhase);
+export const appendRepoAtom = atom(
+  (get) => get(repoAtom),
+  (get, set, newRepos: StarredRepository[]) => {
+    set(repoAtom, (prev) =>
+      [...prev, ...newRepos].sort((a, b) => {
+        const dateA = new Date(a.starredAt);
+        const dateB = new Date(b.starredAt);
+        return isNaN(dateB.getTime())
+          ? -1
+          : isNaN(dateA.getTime())
+            ? 1
+            : dateB.getTime() - dateA.getTime();
+      }),
+    );
+  },
+);

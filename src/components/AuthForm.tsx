@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAtom } from "jotai";
-import { tokenAtom, usernameAtom } from "./state";
+import { appendRepoAtom, repoAtom, tokenAtom, usernameAtom } from "./state";
+import { GraphQLClient } from "graphql-request";
+import { fetchStarredRepositoriesStream } from "@/github/stars";
 
 interface FormState {
   token: string;
@@ -15,6 +17,8 @@ interface FormState {
 export default function AuthForm() {
   const [token, setToken] = useAtom(tokenAtom);
   const [username, setUsername] = useAtom(usernameAtom);
+  const [repos, setRepos] = useAtom(repoAtom);
+  const [_, appendRepos] = useAtom(appendRepoAtom);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("githubToken");
@@ -40,6 +44,54 @@ export default function AuthForm() {
       localStorage.setItem("githubUsername", newUsername);
       setToken(newToken);
       setUsername(newUsername);
+      console.log(`fetching username: ${newUsername}`);
+
+      setRepos([]);
+      try {
+        // first try fetching from localStorage cache
+        const cachedRepos = localStorage.getItem(newUsername);
+        if (cachedRepos) {
+          const repos = JSON.parse(cachedRepos);
+          if (repos && repos != null && repos != "null" && repos != '"null"') {
+            appendRepos(repos);
+          } else {
+            console.log(`removing invalid cache for ${newUsername}: ${repos}`);
+            localStorage.removeItem(newUsername);
+          }
+        } else {
+          // then try to fetch from cached JSON
+          const response = await fetch(`/cached/${newUsername}.json`);
+
+          if (response.ok) {
+            const repos = await response.json();
+
+            // break into chunks of 100 repos and append them
+            // with a delay between so the dom doesn't get overloaded
+            const chunkSize = 700;
+            for (let i = 0; i < repos.length; i += chunkSize) {
+              const chunk = repos.slice(i, i + chunkSize);
+              appendRepos(chunk);
+              await new Promise((resolve) => setTimeout(resolve, 500));
+            }
+          } else {
+            if (token !== "" && token !== "token") {
+              // If no cached data, fetch from GitHub API
+              const client = new GraphQLClient(
+                "https://api.github.com/graphql",
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                },
+              );
+
+              fetchStarredRepositoriesStream(appendRepos, client, newUsername);
+            }
+          }
+        }
+      } catch (err) {
+        console.log(err);
+      }
     }
 
     return { token, username };

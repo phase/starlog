@@ -1,6 +1,6 @@
 import { type StarredRepository } from "@/github/stars";
 
-export const DAYS = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+export const DAYS = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
 export const MONTHS = [
   "Jan",
   "Feb",

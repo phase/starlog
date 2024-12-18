@@ -47,6 +47,7 @@ const formatTooltipContent = (
               className="w-3 h-3 rounded-full mr-2 flex-shrink-0"
               style={{
                 backgroundColor:
+                  //@ts-ignore
                   LANGUAGE_COLORS[
                     repo.node.primaryLanguage?.name || "default"
                   ] || LANGUAGE_COLORS.default,
@@ -89,6 +90,7 @@ const getColor = (
     (a, b) => b[1] - a[1],
   )[0][0];
   const baseColor =
+    //@ts-ignore
     LANGUAGE_COLORS[mostPopularLanguage] || LANGUAGE_COLORS.default;
   const [h, s, l] = hexToHSL(baseColor);
 
