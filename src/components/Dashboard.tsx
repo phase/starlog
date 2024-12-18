@@ -84,6 +84,7 @@ export default function Dashboard() {
         }
       } catch (err) {
         setError("Error fetching starred repositories");
+        console.log(err);
         setLoading(false);
       }
     };

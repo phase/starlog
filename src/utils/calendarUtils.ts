@@ -133,7 +133,7 @@ export function getNicheLanguagesForYear(
   return Object.entries(languageCounts)
     .filter(
       ([lang, count]) =>
-        count > 3 &&
+        count > 5 &&
         count < 40 &&
         !topLanguages.has(lang) &&
         lang !== "Unknown",

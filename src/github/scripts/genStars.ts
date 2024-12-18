@@ -23,14 +23,15 @@ async function main() {
   });
 
   try {
-    const starredRepos = await fetchStarredRepositories(client, username);
+    const starredRepos = await fetchStarredRepositories(
+      client,
+      username,
+      values.limit ? parseInt(values.limit) : undefined,
+    );
     console.log(`Total starred repositories: ${starredRepos.length}`);
     const fileName = `public/cached/${username}.json`;
     const fs = require("fs");
-    fs.writeFileSync(
-      fileName,
-      JSON.stringify(starredRepos, null, values.limit),
-    );
+    fs.writeFileSync(fileName, JSON.stringify(starredRepos));
     console.log(`\nWrote full results to ${fileName}`);
   } catch (error) {
     console.error("Failed to fetch starred repositories", error);
