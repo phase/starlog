@@ -9,6 +9,10 @@ interface BlockCalendarProps {
 }
 
 export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
+  if (starredRepos.length === 0) {
+    return <YearBlock year="2024" calendarData={{}} monthlyMaxStars={{}} />;
+  }
+
   const calendarData = useMemo(() => {
     const data: { [key: string]: StarredRepository[] } = {};
     starredRepos.forEach((repo) => {
@@ -76,7 +80,7 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
           <span className="font-semibold">{overallStats.totalLanguages}</span>{" "}
           languages.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-4 md:gap-4">
           <div>
             <div className="text-sm md:mb-4">
               <p className="mb-1 font-semibold">Favorite Languages</p>

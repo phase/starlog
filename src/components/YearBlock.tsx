@@ -23,6 +23,7 @@ const YearBlock: React.FC<YearBlockProps> = ({
   calendarData,
   monthlyMaxStars,
 }) => {
+  const empty = Object.keys(calendarData).length === 0;
   const cellSize = 14;
   const gapSize = 2;
 
@@ -37,25 +38,27 @@ const YearBlock: React.FC<YearBlockProps> = ({
         </span>
       </div>
       <div>
-        <div className="text-xs text-gray-500">
-          Top languages:{" "}
-          {getTopLanguagesForYear(calendarData, year).map(
-            ([lang, count], index) => (
-              <span key={lang}>
-                {index > 0 && ", "}
-                <span
-                  className="inline-block w-2 h-2 rounded-full mr-1"
-                  style={{
-                    backgroundColor:
-                      //@ts-ignore
-                      LANGUAGE_COLORS[lang] || LANGUAGE_COLORS.default,
-                  }}
-                ></span>
-                {lang} ({count})
-              </span>
-            ),
-          )}
-        </div>
+        {!empty && (
+          <div className="text-xs text-gray-500">
+            Top languages:{" "}
+            {getTopLanguagesForYear(calendarData, year).map(
+              ([lang, count], index) => (
+                <span key={lang}>
+                  {index > 0 && ", "}
+                  <span
+                    className="inline-block w-2 h-2 rounded-full mr-1"
+                    style={{
+                      backgroundColor:
+                        //@ts-ignore
+                        LANGUAGE_COLORS[lang] || LANGUAGE_COLORS.default,
+                    }}
+                  ></span>
+                  {lang} ({count})
+                </span>
+              ),
+            )}
+          </div>
+        )}
         {nicheLanguages.length > 0 && (
           <div className="text-xs text-gray-500">
             Niche languages:{" "}
@@ -77,14 +80,14 @@ const YearBlock: React.FC<YearBlockProps> = ({
         )}
       </div>
       <div className="flex">
-        <div className="mr-2 text-gray-300">
+        <div className="mr-2 text-gray-300 hidden sm:block">
           {DAYS.map((day, index) => (
             <div key={`day-${index}`} className="h-4 w-4 text-[10px]">
               {day[0]}
             </div>
           ))}
         </div>
-        <div className="flex-1 overflow-x-auto">
+        <div className="flex-1">
           <div className="grid xs:grid-cols-2 grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4">
             {MONTHS.map((month, monthIndex) => (
               <div
@@ -110,25 +113,27 @@ const YearBlock: React.FC<YearBlockProps> = ({
           </div>
         </div>
       </div>
-      <div className="text-xs text-gray-500 mb-4">
-        Favorite users:{" "}
-        {getFavoriteUsersForYear(calendarData, year).map(
-          ([user, count], index) => (
-            <span key={user}>
-              {index > 0 && ", "}
-              <a
-                href={`https://github.com/${user}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                {user}
-              </a>{" "}
-              ({count})
-            </span>
-          ),
-        )}
-      </div>
+      {!empty && (
+        <div className="text-xs text-gray-500 mb-4">
+          Favorite users:{" "}
+          {getFavoriteUsersForYear(calendarData, year).map(
+            ([user, count], index) => (
+              <span key={user}>
+                {index > 0 && ", "}
+                <a
+                  href={`https://github.com/${user}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 hover:underline"
+                >
+                  {user}
+                </a>{" "}
+                ({count})
+              </span>
+            ),
+          )}
+        </div>
+      )}
     </div>
   );
 };

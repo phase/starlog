@@ -5,7 +5,7 @@ import { atom } from "jotai";
 export const usernameAtom = atom<string>("");
 export const tokenAtom = atom<string>("");
 
-export const repoAtom = atom<StarredRepository[]>(cachedPhase);
+export const repoAtom = atom<StarredRepository[]>([]);
 export const appendRepoAtom = atom(
   (get) => get(repoAtom),
   (get, set, newRepos: StarredRepository[]) => {

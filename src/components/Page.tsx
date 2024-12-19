@@ -4,7 +4,7 @@ import Dashboard from "@/components/Dashboard";
 export default function Page() {
   return (
     <div className="container mx-auto p-4" style={{ maxWidth: "850px" }}>
-      <div className="mb-4">
+      <div className="my-4">
         <h1 className="text-2xl font-bold tracking-tight">Starlog</h1>
         <p className="text-sm">
           <span className="text-gray-700">A dashboard for GitHub stars by</span>{" "}

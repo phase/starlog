@@ -138,3 +138,48 @@ export default async function fetchStarredRepositories(
     throw error;
   }
 }
+
+export async function fetchStars(
+  consumer: (data: StarredRepository[]) => void,
+  username: string,
+  token?: string,
+) {
+  // first try fetching from localStorage username
+  const cachedRepos = localStorage.getItem(username);
+  if (cachedRepos) {
+    const repos = JSON.parse(cachedRepos);
+    if (repos && repos != null && repos != "null" && repos != '"null"') {
+      consumer(repos);
+    } else {
+      console.log(`removing invalid cache for ${username}: ${repos}`);
+      localStorage.removeItem(username);
+    }
+  } else {
+    // then try to fetch from cached JSON
+    const response = await fetch(`/cached/${username}.json`);
+
+    if (response.ok) {
+      const repos = await response.json();
+
+      // break repos into chunks and append them
+      // with a delay between so the dom doesn't get overloaded
+      const chunkSize = 1600;
+      for (let i = 0; i < repos.length; i += chunkSize) {
+        const chunk = repos.slice(i, i + chunkSize);
+        consumer(chunk);
+        await new Promise((resolve) => setTimeout(resolve, 150));
+      }
+    } else {
+      if (token && token !== "" && token !== "token") {
+        // If no cached data, fetch from GitHub API
+        const client = new GraphQLClient("https://api.github.com/graphql", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        fetchStarredRepositoriesStream(consumer, client, username);
+      }
+    }
+  }
+}

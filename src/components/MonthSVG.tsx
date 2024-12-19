@@ -3,13 +3,6 @@ import * as Tooltip from "@radix-ui/react-tooltip";
 import type { StarredRepository } from "@/github/stars";
 import LANGUAGE_COLORS from "@/assets/data/languageColors.json";
 import {
-  DAYS,
-  MONTHS,
-  getTopLanguagesForYear,
-  getMonthTotal,
-  getYearTotal,
-  getLanguagesForDay,
-  getMostPopularLanguage,
   hexToHSL,
   NO_DATA_COLOR,
   getMonthData,

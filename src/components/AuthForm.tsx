@@ -1,13 +1,12 @@
 "use client";
 
-import { useEffect, useActionState } from "react";
+import { useEffect, useActionState, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAtom } from "jotai";
 import { appendRepoAtom, repoAtom, tokenAtom, usernameAtom } from "./state";
-import { GraphQLClient } from "graphql-request";
-import { fetchStarredRepositoriesStream } from "@/github/stars";
+import { fetchStars, type StarredRepository } from "@/github/stars";
 
 interface FormState {
   token: string;
@@ -19,16 +18,23 @@ export default function AuthForm() {
   const [username, setUsername] = useAtom(usernameAtom);
   const [repos, setRepos] = useAtom(repoAtom);
   const [_, appendRepos] = useAtom(appendRepoAtom);
+  const running = useState(false);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("githubToken");
     const storedUsername = localStorage.getItem("githubUsername");
 
-    if (storedToken) {
+    if (storedToken && storedToken !== "" && storedToken !== "null") {
       setToken(storedToken);
     }
-    if (storedUsername) {
+    if (storedUsername && storedUsername !== "" && storedUsername !== "null") {
       setUsername(storedUsername);
+    }
+
+    // if there are no repos (like on first load), fetch my stars
+    if (repos.length === 0) {
+      setUsername("phase");
+      fetchStars(appendRepos, "phase", undefined);
     }
   }, []);
 
@@ -39,7 +45,7 @@ export default function AuthForm() {
     const newToken = formData.get("tokenInput") as string;
     const newUsername = formData.get("usernameInput") as string;
 
-    if (newToken && newUsername) {
+    if ((newToken && newUsername) || newUsername === "phase") {
       localStorage.setItem("githubToken", newToken);
       localStorage.setItem("githubUsername", newUsername);
       setToken(newToken);
@@ -48,47 +54,7 @@ export default function AuthForm() {
 
       setRepos([]);
       try {
-        // first try fetching from localStorage cache
-        const cachedRepos = localStorage.getItem(newUsername);
-        if (cachedRepos) {
-          const repos = JSON.parse(cachedRepos);
-          if (repos && repos != null && repos != "null" && repos != '"null"') {
-            appendRepos(repos);
-          } else {
-            console.log(`removing invalid cache for ${newUsername}: ${repos}`);
-            localStorage.removeItem(newUsername);
-          }
-        } else {
-          // then try to fetch from cached JSON
-          const response = await fetch(`/cached/${newUsername}.json`);
-
-          if (response.ok) {
-            const repos = await response.json();
-
-            // break repos into chunks and append them
-            // with a delay between so the dom doesn't get overloaded
-            const chunkSize = 1600;
-            for (let i = 0; i < repos.length; i += chunkSize) {
-              const chunk = repos.slice(i, i + chunkSize);
-              appendRepos(chunk);
-              await new Promise((resolve) => setTimeout(resolve, 150));
-            }
-          } else {
-            if (token !== "" && token !== "token") {
-              // If no cached data, fetch from GitHub API
-              const client = new GraphQLClient(
-                "https://api.github.com/graphql",
-                {
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                  },
-                },
-              );
-
-              fetchStarredRepositoriesStream(appendRepos, client, newUsername);
-            }
-          }
-        }
+        await fetchStars(appendRepos, newUsername, newToken);
       } catch (err) {
         console.log(err);
       }
@@ -97,7 +63,7 @@ export default function AuthForm() {
     return { token, username };
   };
 
-  const [formState, formAction] = useActionState(handleSubmit, {
+  const [formState, formAction, pending] = useActionState(handleSubmit, {
     token: token,
     username: username,
   });
@@ -106,7 +72,9 @@ export default function AuthForm() {
     <form action={formAction} className="flex flex-row space-x-4">
       <div className="flex flex-row space-x-2">
         <div>
-          <Label htmlFor="tokenInput">GitHub API Token</Label>
+          <Label htmlFor="tokenInput" className="text-xs">
+            GitHub API Token
+          </Label>
           <Input
             name="tokenInput"
             type="password"
@@ -116,7 +84,9 @@ export default function AuthForm() {
           />
         </div>
         <div>
-          <Label htmlFor="usernameInput">GitHub Username</Label>
+          <Label htmlFor="usernameInput" className="text-xs">
+            Username
+          </Label>
           <Input
             name="usernameInput"
             type="text"
@@ -126,7 +96,7 @@ export default function AuthForm() {
           />
         </div>
       </div>
-      <Button type="submit" className="mt-6">
+      <Button type="submit" className="mt-6" disabled={pending}>
         Scrape Stars
       </Button>
     </form>

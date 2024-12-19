@@ -57,12 +57,12 @@ export function getMonthData(year: number, month: number): (Date | null)[] {
   const lastDay = new Date(year, month + 1, 0);
   const days: (Date | null)[] = [];
 
-  for (let i = 0; i < firstDay.getDay(); i++) {
+  for (let i = 0; i <= firstDay.getDay(); i++) {
     days.push(null);
   }
 
   for (let d = 1; d <= lastDay.getDate(); d++) {
-    days.push(new Date(year, month, d));
+    days.push(new Date(year, month, d + 1));
   }
 
   while (days.length % 7 !== 0) {
@@ -70,26 +70,6 @@ export function getMonthData(year: number, month: number): (Date | null)[] {
   }
 
   return days;
-}
-
-export function getLanguagesForDay(repos: StarredRepository[]): {
-  [key: string]: number;
-} {
-  const languageCounts: { [key: string]: number } = {};
-  repos.forEach((repo) => {
-    const language = repo.node.primaryLanguage?.name || "Unknown";
-    languageCounts[language] = (languageCounts[language] || 0) + 1;
-  });
-  return languageCounts;
-}
-
-export function getMostPopularLanguage(languageCounts: {
-  [key: string]: number;
-}): string {
-  const sortedLanguages = Object.entries(languageCounts).sort(
-    (a, b) => b[1] - a[1],
-  );
-  return sortedLanguages.length > 0 ? sortedLanguages[0][0] : "Unknown";
 }
 
 export function getTopLanguagesForYear(
