@@ -1,7 +1,8 @@
-# GitHub Stars
+# Starlog
 
-[Astro](https://astro.build) site for visualizing the repositories you've starred on GitHub.
-Uses GitHub's GraphQL API, running clientside.
+Dashboard for visualizing the repositories you've starred on GitHub.
+Built with [Bun](https://bun.sh/), [Astro](https://astro.build/), React 19,
+and GitHub's [GraphQL API](https://docs.github.com/en/graphql).
 
 ```shell
 # Run locally

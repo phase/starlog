@@ -65,13 +65,13 @@ export default function AuthForm() {
           if (response.ok) {
             const repos = await response.json();
 
-            // break into chunks of 100 repos and append them
+            // break repos into chunks and append them
             // with a delay between so the dom doesn't get overloaded
-            const chunkSize = 700;
+            const chunkSize = 1600;
             for (let i = 0; i < repos.length; i += chunkSize) {
               const chunk = repos.slice(i, i + chunkSize);
               appendRepos(chunk);
-              await new Promise((resolve) => setTimeout(resolve, 500));
+              await new Promise((resolve) => setTimeout(resolve, 150));
             }
           } else {
             if (token !== "" && token !== "token") {

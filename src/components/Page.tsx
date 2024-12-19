@@ -5,9 +5,9 @@ export default function Page() {
   return (
     <div className="container mx-auto p-4" style={{ maxWidth: "850px" }}>
       <div className="mb-4">
-        <h1 className="text-2xl font-bold tracking-tight">GitHub Stars</h1>
+        <h1 className="text-2xl font-bold tracking-tight">Starlog</h1>
         <p className="text-sm">
-          <span className="text-gray-700">A dashboard by</span>{" "}
+          <span className="text-gray-700">A dashboard for GitHub stars by</span>{" "}
           <a
             href="https://jadon.io"
             target="_blank"
@@ -22,10 +22,22 @@ export default function Page() {
       <AuthForm />
       <p className="mb-8 mt-1 text-gray-400 text-xs">
         Runs clientside using{" "}
-        <a href="https://docs.github.com/en/graphql/guides/forming-calls-with-graphql">
+        <a
+          href="https://docs.github.com/en/graphql/guides/forming-calls-with-graphql"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-400 hover:underline"
+        >
           GitHub's GraphQL API
         </a>
-        .
+        . Click{" "}
+        <span
+          className="text-blue-400 hover:underline"
+          onClick={() => localStorage.clear()}
+        >
+          here
+        </span>{" "}
+        to clear cache.
       </p>
       <Dashboard />
     </div>

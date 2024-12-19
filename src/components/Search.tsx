@@ -39,7 +39,6 @@ export default function Search({ starredRepos }: SearchProps) {
             repo.node.description.toLowerCase().includes(term.toLowerCase())) ||
           (repo.node.primaryLanguage &&
             //@ts-ignore
-
             repo.node.primaryLanguage.name
               .toLowerCase()
               .includes(term.toLowerCase())),
@@ -95,7 +94,7 @@ export default function Search({ starredRepos }: SearchProps) {
               </div>
               <div className="text-right">
                 <div className="flex items-center justify-end mb-1">
-                  {repo.node.primaryLanguage && (
+                  {(repo.node.primaryLanguage && (
                     <>
                       <span
                         className="w-2 h-2 rounded-full mr-1"
@@ -110,7 +109,7 @@ export default function Search({ starredRepos }: SearchProps) {
                         {repo.node.primaryLanguage.name}
                       </span>
                     </>
-                  )}
+                  )) || <span className="text-xs text-gray-500">Unknown</span>}
                 </div>
                 <p className="text-xs text-gray-400">
                   Starred: {new Date(repo.starredAt).toLocaleDateString()}

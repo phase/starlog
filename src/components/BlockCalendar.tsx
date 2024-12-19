@@ -43,20 +43,34 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
     [calendarData],
   );
 
+  const yearBlocks = useMemo(
+    () =>
+      years.map((year) => {
+        const yearData = Object.fromEntries(
+          Object.entries(calendarData).filter(([date]) =>
+            date.startsWith(year),
+          ),
+        );
+
+        return (
+          <YearBlock
+            key={year}
+            year={year}
+            calendarData={yearData}
+            monthlyMaxStars={monthlyMaxStars}
+          />
+        );
+      }),
+    [years, calendarData, monthlyMaxStars],
+  );
+
   return (
     <div className="space-y-8">
-      {years.map((year) => (
-        <YearBlock
-          key={year}
-          year={year}
-          calendarData={calendarData}
-          monthlyMaxStars={monthlyMaxStars}
-        />
-      ))}
+      {yearBlocks}
       <div className="mt-8 p-4 bg-gray-100 rounded-lg">
         <h2 className="font-semibold mb-2">Summary</h2>
         <p className="text-sm mb-2">
-          You starred{" "}
+          Starred{" "}
           <span className="font-semibold">{overallStats.totalStars}</span>{" "}
           repositories made with{" "}
           <span className="font-semibold">{overallStats.totalLanguages}</span>{" "}
@@ -68,7 +82,7 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
               <p className="mb-1 font-semibold">Favorite Languages</p>
               <ul className="list-disc list-inside">
                 {overallStats.topLanguages
-                  .splice(0, overallStats.topLanguages.length / 2)
+                  .slice(0, overallStats.topLanguages.length / 2)
                   .map(([lang, count]) => (
                     <li key={lang} className="flex items-center">
                       <span
@@ -92,20 +106,25 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
                 &nbsp;
               </p>
               <ul className="list-disc list-inside">
-                {overallStats.topLanguages.map(([lang, count]) => (
-                  <li key={lang} className="flex items-center">
-                    <span
-                      className="inline-block w-2 h-2 rounded-full mr-2"
-                      style={{
-                        backgroundColor:
-                          //@ts-ignore
-                          LANGUAGE_COLORS[lang] || LANGUAGE_COLORS.default,
-                      }}
-                    ></span>
-                    {lang}
-                    <span className="text-gray-400 ml-1">({count})</span>
-                  </li>
-                ))}
+                {overallStats.topLanguages
+                  .slice(
+                    overallStats.topLanguages.length / 2,
+                    overallStats.topLanguages.length,
+                  )
+                  .map(([lang, count]) => (
+                    <li key={lang} className="flex items-center">
+                      <span
+                        className="inline-block w-2 h-2 rounded-full mr-2"
+                        style={{
+                          backgroundColor:
+                            //@ts-ignore
+                            LANGUAGE_COLORS[lang] || LANGUAGE_COLORS.default,
+                        }}
+                      ></span>
+                      {lang}
+                      <span className="text-gray-400 ml-1">({count})</span>
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>
@@ -114,7 +133,7 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
               <p className="mb-1 font-semibold">Favorite Users</p>
               <ul className="list-disc list-inside">
                 {overallStats.topUsers
-                  .splice(0, overallStats.topUsers.length / 2)
+                  .slice(0, overallStats.topUsers.length / 2)
                   .map(([user, count]) => (
                     <li key={user}>
                       <a
@@ -137,19 +156,24 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
                 &nbsp;
               </p>
               <ul className="list-disc list-inside">
-                {overallStats.topUsers.map(([user, count]) => (
-                  <li key={user}>
-                    <a
-                      href={`https://github.com/${user}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-500 hover:underline"
-                    >
-                      {user}
-                    </a>
-                    <span className="text-gray-400 ml-1">({count})</span>
-                  </li>
-                ))}
+                {overallStats.topUsers
+                  .slice(
+                    overallStats.topUsers.length / 2,
+                    overallStats.topUsers.length,
+                  )
+                  .map(([user, count]) => (
+                    <li key={user}>
+                      <a
+                        href={`https://github.com/${user}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-500 hover:underline"
+                      >
+                        {user}
+                      </a>
+                      <span className="text-gray-400 ml-1">({count})</span>
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>
