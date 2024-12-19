@@ -112,13 +112,28 @@ export default async function fetchStarredRepositories(
       iterations++;
       console.log(`Fetching page ${iterations}...`);
 
-      const data: StarredRepositoriesResponse =
-        await client.request<StarredRepositoriesResponse>(STARRED_REPOS_QUERY, {
-          username,
-          cursor,
-        });
+      let data: StarredRepositoriesResponse | null = null;
 
-      const { edges, pageInfo } = data.user.starredRepositories;
+      // fetch stars, and retry if it failes
+      let retries = 5;
+      while (data == null && retries > 0) {
+        try {
+          data = await client.request<StarredRepositoriesResponse>(
+            STARRED_REPOS_QUERY,
+            {
+              username,
+              cursor,
+            },
+          );
+        } catch (error) {
+          console.error("Error fetching starred repositories:", error);
+          console.log(error);
+          retries--;
+        }
+      }
+
+      //@ts-ignore this is weird?
+      const { edges, pageInfo } = data!.user.starredRepositories;
 
       console.log(`Got ${edges.length} repositories on this page`);
 
