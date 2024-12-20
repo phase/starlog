@@ -7,5 +7,6 @@ import tailwind from "@astrojs/tailwind";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://starlog.jadon.io",
   integrations: [react(), tailwind({ applyBaseStyles: false })],
 });

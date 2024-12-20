@@ -2,6 +2,8 @@
 
 ![example screenshot](./example_screenshot.png)
 
+[starlog.jadon.io](https://starlog.jadon.io/)
+
 Dashboard for visualizing the repositories you've starred on GitHub.
 Built with [Bun](https://bun.sh/), [Astro](https://astro.build/), React 19,
 and GitHub's [GraphQL API](https://docs.github.com/en/graphql).
