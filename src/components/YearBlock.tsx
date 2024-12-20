@@ -10,7 +10,7 @@ import {
   getMonthTotal,
   getYearTotal,
   getFavoriteUsersForYear,
-} from "@/utils/calendarUtils";
+} from "@/lib/calendar";
 
 interface YearBlockProps {
   year: string;

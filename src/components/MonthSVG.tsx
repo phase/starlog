@@ -7,7 +7,7 @@ import {
   NO_DATA_COLOR,
   getMonthData,
   hslToString,
-} from "@/utils/calendarUtils";
+} from "@/lib/calendar";
 
 interface MonthSVGProps {
   year: number;

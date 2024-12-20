@@ -16,7 +16,18 @@ export default function Page() {
           >
             Jadon
           </a>
-          <span className="text-gray-700">.</span>
+          <span className="text-gray-700">. </span>
+          <span className="text-gray-400 text-xs">
+            It's{" "}
+            <a
+              href="https://github.com/phase/starlog"
+              target="_blank"
+              className="text-blue-400 hover:underline"
+            >
+              open source
+            </a>
+            !
+          </span>
         </p>
       </div>
       <AuthForm />

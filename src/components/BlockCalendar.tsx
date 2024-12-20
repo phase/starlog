@@ -1,6 +1,6 @@
 import LANGUAGE_COLORS from "@/assets/data/languageColors.json";
 import type { StarredRepository } from "@/github/stars";
-import { getOverallStats } from "@/utils/calendarUtils";
+import { getOverallStats } from "@/lib/calendar";
 import { useMemo } from "react";
 import YearBlock from "./YearBlock";
 
