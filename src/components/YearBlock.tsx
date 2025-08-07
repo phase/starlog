@@ -33,13 +33,13 @@ const YearBlock: React.FC<YearBlockProps> = ({
     <div className="space-y-4">
       <div className="text-sm font-semibold mb-2">
         {year}{" "}
-        <span className="font-normal text-gray-500">
+        <span className="font-normal text-muted-foreground">
           ({getYearTotal(calendarData, year)} stars)
         </span>
       </div>
       <div>
         {!empty && (
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-muted-foreground">
             Top languages:{" "}
             {getTopLanguagesForYear(calendarData, year).map(
               ([lang, count], index) => (
@@ -60,7 +60,7 @@ const YearBlock: React.FC<YearBlockProps> = ({
           </div>
         )}
         {nicheLanguages.length > 0 && (
-          <div className="text-xs text-gray-500">
+          <div className="text-xs text-muted-foreground">
             Niche languages:{" "}
             {nicheLanguages.map(([lang, count], index) => (
               <span key={lang}>
@@ -80,7 +80,7 @@ const YearBlock: React.FC<YearBlockProps> = ({
         )}
       </div>
       <div className="flex">
-        <div className="mr-2 text-gray-300 hidden sm:block">
+        <div className="mr-2 text-muted-foreground hidden sm:block">
           {DAYS.map((day, index) => (
             <div key={`day-${index}`} className="h-4 w-4 text-[10px]">
               {day[0]}
@@ -104,7 +104,7 @@ const YearBlock: React.FC<YearBlockProps> = ({
                 />
                 <div className="text-xs text-center mt-1">
                   {month}
-                  <span className="text-gray-400 ml-1">
+                  <span className="text-muted-foreground ml-1">
                     ({getMonthTotal(calendarData, parseInt(year), monthIndex)})
                   </span>
                 </div>
@@ -114,7 +114,7 @@ const YearBlock: React.FC<YearBlockProps> = ({
         </div>
       </div>
       {!empty && (
-        <div className="text-xs text-gray-500 mb-4">
+        <div className="text-xs text-muted-foreground mb-4">
           Favorite users:{" "}
           {getFavoriteUsersForYear(calendarData, year).map(
             ([user, count], index) => (
@@ -124,7 +124,7 @@ const YearBlock: React.FC<YearBlockProps> = ({
                   href={`https://github.com/${user}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-500 hover:underline"
+                  className="text-primary hover:underline"
                 >
                   {user}
                 </a>{" "}

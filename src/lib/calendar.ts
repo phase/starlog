@@ -15,7 +15,7 @@ export const MONTHS = [
   "Nov",
   "Dec",
 ];
-export const NO_DATA_COLOR = "#f0f0f0";
+export const NO_DATA_COLOR = "hsl(var(--muted))";
 
 export function hexToHSL(hex: string): [number, number, number] {
   const r = parseInt(hex.slice(1, 3), 16) / 255;

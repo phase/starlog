@@ -50,11 +50,11 @@ const formatTooltipContent = (
               href={repo.node.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="truncate text-blue-500 hover:underline"
+              className="truncate text-primary hover:underline"
             >
               {repo.node.owner.login}/{repo.node.name}
             </a>
-            <span className="text-gray-500 ml-1">
+            <span className="text-muted-foreground ml-1">
               ({repo.node.primaryLanguage?.name || "Unknown"})
             </span>
           </li>
@@ -166,11 +166,11 @@ export const MonthSVG: React.FC<MonthSVGProps> = ({
               </Tooltip.Trigger>
               <Tooltip.Portal>
                 <Tooltip.Content
-                  className="bg-white border border-gray-200 rounded-md shadow-md z-50"
+                  className="rounded-md shadow-md z-50 border bg-popover text-popover-foreground"
                   sideOffset={5}
                 >
                   {formatTooltipContent(dateString, repos)}
-                  <Tooltip.Arrow className="fill-white" />
+                  <Tooltip.Arrow className="fill-current text-popover" />
                 </Tooltip.Content>
               </Tooltip.Portal>
             </Tooltip.Root>

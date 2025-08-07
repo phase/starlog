@@ -84,11 +84,11 @@ export default function Search({ starredRepos }: SearchProps) {
                   href={repo.node.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-blue-500 hover:underline font-semibold truncate block"
+                  className="text-primary hover:underline font-semibold truncate block"
                 >
                   {repo.node.owner.login}/{repo.node.name}
                 </a>
-                <p className="text-gray-600 truncate">
+                <p className="text-muted-foreground truncate">
                   {repo.node.description}
                 </p>
               </div>
@@ -105,13 +105,15 @@ export default function Search({ starredRepos }: SearchProps) {
                             LANGUAGE_COLORS.default,
                         }}
                       ></span>
-                      <span className="text-xs text-gray-500">
+                      <span className="text-xs text-muted-foreground">
                         {repo.node.primaryLanguage.name}
                       </span>
                     </>
-                  )) || <span className="text-xs text-gray-500">Unknown</span>}
+                  )) || (
+                    <span className="text-xs text-muted-foreground">Unknown</span>
+                  )}
                 </div>
-                <p className="text-xs text-gray-400">
+                <p className="text-xs text-muted-foreground">
                   Starred: {new Date(repo.starredAt).toLocaleDateString()}
                 </p>
               </div>
@@ -120,7 +122,7 @@ export default function Search({ starredRepos }: SearchProps) {
         ))}
       </div>
       {searchResults.length === 0 && searchTerm && (
-        <p className="text-center text-gray-500 mt-2 mb-4">No results found</p>
+        <p className="text-center text-muted-foreground mt-2 mb-4">No results found</p>
       )}
     </div>
   );

@@ -71,7 +71,7 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
   return (
     <div className="space-y-8">
       {yearBlocks}
-      <div className="mt-8 p-4 bg-gray-100 rounded-lg">
+      <div className="mt-8 p-4 rounded-lg border bg-card text-card-foreground">
         <h2 className="font-semibold mb-2">Summary</h2>
         <p className="text-sm mb-2">
           Starred{" "}
@@ -98,7 +98,7 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
                         }}
                       ></span>
                       {lang}
-                      <span className="text-gray-400 ml-1">({count})</span>
+                      <span className="text-muted-foreground ml-1">({count})</span>
                     </li>
                   ))}
               </ul>
@@ -126,7 +126,7 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
                         }}
                       ></span>
                       {lang}
-                      <span className="text-gray-400 ml-1">({count})</span>
+                      <span className="text-muted-foreground ml-1">({count})</span>
                     </li>
                   ))}
               </ul>
@@ -144,11 +144,11 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
                         href={`https://github.com/${user}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-500 hover:underline"
+                        className="text-primary hover:underline"
                       >
                         {user}
                       </a>
-                      <span className="text-gray-400 ml-1">({count})</span>
+                      <span className="text-muted-foreground ml-1">({count})</span>
                     </li>
                   ))}
               </ul>
@@ -171,11 +171,11 @@ export default function BlockCalendar({ starredRepos }: BlockCalendarProps) {
                         href={`https://github.com/${user}`}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-blue-500 hover:underline"
+                        className="text-primary hover:underline"
                       >
                         {user}
                       </a>
-                      <span className="text-gray-400 ml-1">({count})</span>
+                      <span className="text-muted-foreground ml-1">({count})</span>
                     </li>
                   ))}
               </ul>
