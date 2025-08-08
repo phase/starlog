@@ -97,6 +97,64 @@ export async function fetchStarredRepositoriesStream(
   }
 }
 
+/**
+ * Fetch newest starred repositories and stop once we overlap with any cached repo.
+ * Only emits repositories that are not already present in existingRepoKeys.
+ */
+async function fetchNewStarsUntilOverlap(
+  consumer: (data: StarredRepository[]) => void,
+  client: GraphQLClient,
+  username: string,
+  existingRepoKeys: Set<string>,
+  maxIterations?: number,
+): Promise<StarredRepository[]> {
+  let hasNextPage = true;
+  let cursor: string | null = null;
+  let iterations = 0;
+  const emittedKeys = new Set<string>();
+  const newlyFetched: StarredRepository[] = [];
+
+  const toKey = (r: StarredRepository) => r.node.url || `${r.node.owner.login}/${r.node.name}`;
+
+  try {
+    while (hasNextPage && (!maxIterations || iterations < maxIterations)) {
+      iterations++;
+      const data: StarredRepositoriesResponse = await client.request<StarredRepositoriesResponse>(
+        STARRED_REPOS_QUERY,
+        { username, cursor },
+      );
+
+      const { edges, pageInfo } = data.user.starredRepositories;
+
+      // Filter out anything that exists in the cache or already emitted
+      const pageNew = edges.filter((e) => {
+        const key = toKey(e);
+        return !existingRepoKeys.has(key) && !emittedKeys.has(key);
+      });
+
+      if (pageNew.length > 0) {
+        consumer(pageNew);
+        pageNew.forEach((e) => emittedKeys.add(toKey(e)));
+        newlyFetched.push(...pageNew);
+      }
+
+      const pageHadOverlap = edges.length !== pageNew.length; // at least one duplicate with cache
+      if (pageHadOverlap) {
+        // We hit the boundary of the cache; no need to page further
+        break;
+      }
+
+      hasNextPage = pageInfo.hasNextPage;
+      cursor = pageInfo.endCursor;
+    }
+
+    return newlyFetched;
+  } catch (error) {
+    console.error("Error fetching starred repositories until overlap:", error);
+    throw error;
+  }
+}
+
 export default async function fetchStarredRepositories(
   client: GraphQLClient,
   username: string,
@@ -159,42 +217,89 @@ export async function fetchStars(
   username: string,
   token?: string,
 ) {
-  // first try fetching from localStorage username
-  const cachedRepos = localStorage.getItem(username);
-  if (cachedRepos) {
-    const repos = JSON.parse(cachedRepos);
-    if (repos && repos != null && repos != "null" && repos != '"null"') {
-      consumer(repos);
-    } else {
-      console.log(`removing invalid cache for ${username}: ${repos}`);
-      localStorage.removeItem(username);
+  // Assemble cached baseline (from localStorage or static JSON)
+  let baseline: StarredRepository[] | null = null;
+  const local = localStorage.getItem(username);
+  if (local && local !== "null" && local !== '"null"') {
+    try {
+      baseline = JSON.parse(local);
+    } catch {
+      baseline = null;
     }
-  } else {
-    // then try to fetch from cached JSON
-    const response = await fetch(`/cached/${username}.json`);
+  }
 
-    if (response.ok) {
-      const repos = await response.json();
+  if (!baseline) {
+    try {
+      const response = await fetch(`/cached/${username}.json`);
+      if (response.ok) {
+        baseline = await response.json();
+      }
+    } catch {
+      // ignore
+    }
+  }
 
-      // break repos into chunks and append them
-      // with a delay between so the dom doesn't get overloaded
-      const chunkSize = 1600;
-      for (let i = 0; i < repos.length; i += chunkSize) {
-        const chunk = repos.slice(i, i + chunkSize);
-        consumer(chunk);
-        await new Promise((resolve) => setTimeout(resolve, 150));
+  // Stream the baseline first if we have it (chunked to keep UI responsive)
+  if (baseline && Array.isArray(baseline) && baseline.length > 0) {
+    const chunkSize = 1600;
+    for (let i = 0; i < baseline.length; i += chunkSize) {
+      const chunk = baseline.slice(i, i + chunkSize);
+      consumer(chunk);
+      // Let the UI breathe a bit
+      await new Promise((resolve) => setTimeout(resolve, 150));
+    }
+  }
+
+  // If we have a token, try to fetch only the new stars until we overlap with the cache
+  if (token && token !== "" && token !== "token") {
+    const client = new GraphQLClient("https://api.github.com/graphql", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (baseline && Array.isArray(baseline) && baseline.length > 0) {
+      // Build a set of repo keys from the baseline for deduplication and overlap detection
+      const existingKeys = new Set<string>();
+      for (const r of baseline) {
+        // Prefer URL as the unique key
+        const url = (r as any)?.node?.url;
+        if (url && typeof url === "string") {
+          existingKeys.add(url);
+        } else {
+          existingKeys.add(`${r.node.owner.login}/${r.node.name}`);
+        }
+      }
+
+      const newlyFetched = await fetchNewStarsUntilOverlap(
+        consumer,
+        client,
+        username,
+        existingKeys,
+      );
+
+      // Update localStorage with merged, de-duplicated results
+      try {
+        const merged = [...newlyFetched, ...baseline];
+        // Ensure no duplicates in merged (by URL)
+        const seen = new Set<string>();
+        const deduped: StarredRepository[] = [];
+        for (const r of merged) {
+          const key = (r as any)?.node?.url || `${r.node.owner.login}/${r.node.name}`;
+          if (!seen.has(key)) {
+            seen.add(key);
+            deduped.push(r);
+          }
+        }
+        // Sort newest first by starredAt
+        deduped.sort((a, b) => new Date(b.starredAt).getTime() - new Date(a.starredAt).getTime());
+        localStorage.setItem(username, JSON.stringify(deduped));
+      } catch (e) {
+        console.warn("Failed to update merged cache in localStorage:", e);
       }
     } else {
-      if (token && token !== "" && token !== "token") {
-        // If no cached data, fetch from GitHub API
-        const client = new GraphQLClient("https://api.github.com/graphql", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        fetchStarredRepositoriesStream(consumer, client, username);
-      }
+      // No baseline cache; fall back to streaming all from API
+      fetchStarredRepositoriesStream(consumer, client, username);
     }
   }
 }
