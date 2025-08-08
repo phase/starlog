@@ -42,18 +42,23 @@ function MoonIcon(props: React.SVGProps<SVGSVGElement>) {
   );
 }
 
-function getInitialTheme(): "light" | "dark" {
-  if (typeof window === "undefined") return "light";
+function getInitialThemeClient(): "light" | "dark" {
   try {
     const stored = localStorage.getItem("theme");
     if (stored === "light" || stored === "dark") return stored;
   } catch {}
-  const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+  const prefersDark = typeof window !== "undefined" && window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
   return prefersDark ? "dark" : "light";
 }
 
 export default function ThemeToggle() {
-  const [theme, setTheme] = useState<"light" | "dark">(getInitialTheme());
+  // Start with light to match SSR, then update after mount to avoid hydration mismatch
+  const [theme, setTheme] = useState<"light" | "dark">("light");
+
+  useEffect(() => {
+    // Initialize from client settings on mount
+    setTheme(getInitialThemeClient());
+  }, []);
 
   useEffect(() => {
     const root = document.documentElement;

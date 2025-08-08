@@ -185,14 +185,10 @@ export function getOverallStats(calendarData: {
   });
 
   const topLanguages = Object.entries(languageCounts)
-    .filter(([language, count]) => count > 3)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 40);
+    .sort((a, b) => b[1] - a[1]);
 
   const topUsers = Object.entries(userCounts)
-    .filter(([username, count]) => count > 3)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 40);
+    .sort((a, b) => b[1] - a[1]);
 
   return {
     totalStars,
