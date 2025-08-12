@@ -70,7 +70,7 @@ export default function Search({ starredRepos }: SearchProps) {
           className="flex-grow"
         />
         {searchResults.length > 3 && (
-          <Button onClick={() => setShowAll(!showAll)}>
+          <Button size="sm" onClick={() => setShowAll(!showAll)}>
             {showAll ? "Show Less" : "Show More"}
           </Button>
         )}

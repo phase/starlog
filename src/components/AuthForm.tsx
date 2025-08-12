@@ -117,10 +117,10 @@ export default function AuthForm() {
           />
         </div>
       </div>
-      <div className="flex items-center gap-3">
-        <Button type="submit">Load Stars</Button>
+      <div className="flex items-end gap-3">
+        <Button type="submit" className="h-[28px] px-3 self-end">Load Stars</Button>
         {loadingUsername && (
-          <div className="flex items-center gap-2 text-sm text-muted-foreground" aria-live="polite">
+          <div className="flex items-center gap-2 text-sm text-muted-foreground self-end" aria-live="polite">
             <Loader2 className="animate-spin" />
             <span className="text-xs">
               Loading stars for <span className="font-semibold">{loadingUsername}</span>…
