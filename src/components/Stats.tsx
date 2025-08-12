@@ -1,5 +1,7 @@
 import type { StarredRepository } from "@/github/stars";
 import React, { useMemo, useState } from "react";
+import * as Tooltip from "@radix-ui/react-tooltip";
+import "@/components/tooltipStyle.css";
 import LANGUAGE_COLORS from "@/assets/data/languageColors.json";
 
 interface StatsProps {
@@ -151,17 +153,14 @@ export default function Stats({ calendarData, starredRepos }: StatsProps) {
     return LANGUAGE_COLORS[top] || LANGUAGE_COLORS.default;
   };
 
-  const [hoveredHour, setHoveredHour] = useState<{ wd: number; h: number } | null>(null);
-  const hoveredHourSummary = useMemo(() => {
-    if (!hoveredHour) return null;
-    const { wd, h } = hoveredHour;
+  const getHourSummary = (wd: number, h: number) => {
     const langMap = heatLangCounts[wd][h];
     const total = Object.values(langMap).reduce((a, b) => a + b, 0);
     const items = Object.entries(langMap)
       .sort((a, b) => b[1] - a[1])
       .map(([language, count]) => ({ language, count, pct: total ? Math.round((count / total) * 100) : 0 }));
     return { wd, h, total, items };
-  }, [hoveredHour, heatLangCounts]);
+  };
 
   return (
     <div className="space-y-8">
@@ -294,67 +293,83 @@ export default function Stats({ calendarData, starredRepos }: StatsProps) {
       <div>
         <div className="mb-2 font-semibold">Stars by Hour and Weekday</div>
         <div className="border rounded-lg p-3 overflow-x-auto">
-          <div className="min-w-[720px]">
-            <div className="grid" style={{ gridTemplateColumns: `repeat(25, minmax(0, 1fr))`, gap: "4px" }}>
-              {/* Corner cell */}
-              <div />
-              {/* Hour labels */}
-              {Array.from({ length: 24 }, (_, h) => (
-                <div key={`h-${h}`} className="text-[10px] text-muted-foreground text-center">
-                  {formatHourLabel(h)}
-                </div>
-              ))}
-              {heat.map((row, wd) => (
-                <React.Fragment key={`row-${wd}`}>
-                  <div className="text-[10px] text-muted-foreground flex items-center">
-                    {WEEKDAYS[wd]}
+          <Tooltip.Provider delayDuration={150}>
+            <div className="min-w-[720px]">
+              <div className="grid" style={{ gridTemplateColumns: `repeat(25, minmax(0, 1fr))`, gap: "4px" }}>
+                {/* Corner cell */}
+                <div />
+                {/* Hour labels */}
+                {Array.from({ length: 24 }, (_, h) => (
+                  <div key={`h-${h}`} className="text-[10px] text-muted-foreground text-center">
+                    {formatHourLabel(h)}
                   </div>
-                  {row.map((val, h) => (
-                    <div
-                      key={`cell-${wd}-${h}`}
-                      className="h-4 rounded cursor-pointer"
-                      style={{
-                        backgroundColor: "hsl(var(--primary))",
-                        opacity: Math.max(0.12, val / maxHeat),
-                      }}
-                      title={`${WEEKDAYS[wd]} @ ${h}:00 — ${val}`}
-                      onMouseEnter={() => setHoveredHour({ wd, h })}
-                    />
-                  ))}
-                </React.Fragment>
-              ))}
-            </div>
-          </div>
-        </div>
-        {/* Hover summary for hour/day */}
-        <div className="mt-3 border rounded-lg p-3">
-          <div className="text-xs text-muted-foreground mb-1">Hour summary</div>
-          {hoveredHourSummary ? (
-            <div>
-              <div className="text-sm font-semibold mb-1">
-                {WEEKDAYS[hoveredHourSummary.wd]} @ {formatHourLabel(hoveredHourSummary.h)} — Total: {hoveredHourSummary.total}
-              </div>
-              <ul className="space-y-1 text-sm">
-                {hoveredHourSummary.items.map((item) => (
-                  <li key={`hs-${hoveredHourSummary.wd}-${hoveredHourSummary.h}-${item.language}`} className="flex items-center justify-between gap-2">
-                    <div className="flex items-center gap-2">
-                      <span
-                        className="inline-block w-3 h-3 rounded"
-                        style={{
-                          // @ts-ignore
-                          backgroundColor: LANGUAGE_COLORS[item.language] || LANGUAGE_COLORS.default,
-                        }}
-                      ></span>
-                      <span>{item.language}</span>
-                    </div>
-                    <div className="tabular-nums text-muted-foreground">{item.count} ({item.pct}%)</div>
-                  </li>
                 ))}
-              </ul>
+                {heat.map((row, wd) => (
+                  <React.Fragment key={`row-${wd}`}>
+                    <div className="text-[10px] text-muted-foreground flex items-center">
+                      {WEEKDAYS[wd]}
+                    </div>
+                    {row.map((val, h) => {
+                      const summary = getHourSummary(wd, h);
+                      return (
+                        <Tooltip.Root key={`cell-${wd}-${h}`}>
+                          <Tooltip.Trigger asChild>
+                            <div
+                              className="h-4 rounded cursor-pointer"
+                              style={{
+                                backgroundColor: "hsl(var(--primary))",
+                                opacity: Math.max(0.12, val / maxHeat),
+                              }}
+                              aria-label={`${WEEKDAYS[wd]} @ ${formatHourLabel(h)} — ${val}`}
+                            />
+                          </Tooltip.Trigger>
+                          <Tooltip.Content
+                            className="TooltipContent border"
+                            side="top"
+                            align="center"
+                            style={{
+                              backgroundColor: "hsl(var(--popover))",
+                              color: "hsl(var(--popover-foreground))",
+                              borderColor: "hsl(var(--border))",
+                            }}
+                          >
+                            <div className="text-xs text-muted-foreground mb-1">
+                              {WEEKDAYS[wd]} @ {formatHourLabel(h)} — Total: {summary.total}
+                            </div>
+                            {summary.items.length > 0 ? (
+                              <ul className="space-y-1 text-sm">
+                                {summary.items.map((item) => (
+                                  <li key={`hs-${wd}-${h}-${item.language}`} className="flex items-center justify-between gap-2">
+                                    <div className="flex items-center gap-2">
+                                      <span
+                                        className="inline-block w-3 h-3 rounded"
+                                        style={{
+                                          // @ts-ignore
+                                          backgroundColor: LANGUAGE_COLORS[item.language] || LANGUAGE_COLORS.default,
+                                        }}
+                                      ></span>
+                                      <span>{item.language}</span>
+                                    </div>
+                                    <div className="tabular-nums text-muted-foreground">{item.count} ({item.pct}%)</div>
+                                  </li>
+                                ))}
+                              </ul>
+                            ) : (
+                              <div className="text-sm text-muted-foreground">No stars</div>
+                            )}
+                            <Tooltip.Arrow
+                              className="TooltipArrow"
+                              style={{ fill: "hsl(var(--popover))" }}
+                            />
+                          </Tooltip.Content>
+                        </Tooltip.Root>
+                      );
+                    })}
+                  </React.Fragment>
+                ))}
+              </div>
             </div>
-          ) : (
-            <div className="text-sm text-muted-foreground">Hover a cell to see language breakdown</div>
-          )}
+          </Tooltip.Provider>
         </div>
       </div>
 
