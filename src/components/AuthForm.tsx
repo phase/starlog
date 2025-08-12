@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useActionState, useState } from "react";
+import { useEffect, useActionState, useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAtom } from "jotai";
 import { appendRepoAtom, repoAtom, tokenAtom, usernameAtom } from "./state";
-import { fetchStars, type StarredRepository } from "@/github/stars";
+import { fetchStarsCancelable } from "@/github/stars";
 
 interface FormState {
   token: string;
@@ -19,6 +20,8 @@ export default function AuthForm() {
   const [repos, setRepos] = useAtom(repoAtom);
   const [_, appendRepos] = useAtom(appendRepoAtom);
   const running = useState(false);
+  const [loadingUsername, setLoadingUsername] = useState<string | null>(null);
+  const currentCancelRef = useRef<null | (() => void)>(null);
 
   useEffect(() => {
     const storedToken = localStorage.getItem("githubToken");
@@ -32,9 +35,18 @@ export default function AuthForm() {
     }
 
     // if there are no repos (like on first load), fetch my stars
-    if (repos.length === 0) {
-      setUsername("phase");
-      fetchStars(appendRepos, "phase", undefined);
+    if (repos.length === 0 && !username) {
+      const username = "phase";
+      setUsername(username);
+      if (currentCancelRef.current) currentCancelRef.current();
+      setLoadingUsername(username);
+      const { cancel, promise } = fetchStarsCancelable((data) => {
+        appendRepos(data);
+      }, username, undefined);
+      currentCancelRef.current = cancel;
+      promise.finally(() => {
+        setLoadingUsername((prev) => (prev === username ? null : prev));
+      });
     }
   }, []);
 
@@ -54,7 +66,16 @@ export default function AuthForm() {
 
       setRepos([]);
       try {
-        await fetchStars(appendRepos, newUsername, newToken);
+        if (currentCancelRef.current) currentCancelRef.current();
+        setLoadingUsername(newUsername);
+        const { cancel, promise } = fetchStarsCancelable((data) => {
+          appendRepos(data);
+        }, newUsername, newToken);
+        currentCancelRef.current = cancel;
+        // Do not await; allow UI to keep responding while pages stream in
+        promise.finally(() => {
+          setLoadingUsername((prev) => (prev === newUsername ? null : prev));
+        });
       } catch (err) {
         console.log(err);
       }
@@ -69,8 +90,8 @@ export default function AuthForm() {
   });
 
   return (
-    <form action={formAction} className="flex flex-row space-x-4">
-      <div className="flex flex-row space-x-2">
+    <form action={formAction} className="flex flex-row items-end gap-4">
+      <div className="flex flex-row gap-2">
         <div>
           <Label htmlFor="tokenInput" className="text-xs">
             GitHub API Token
@@ -96,9 +117,17 @@ export default function AuthForm() {
           />
         </div>
       </div>
-      <Button type="submit" className="mt-6" disabled={pending}>
-        Scrape Stars
-      </Button>
+      <div className="flex items-center gap-3">
+        <Button type="submit">Load Stars</Button>
+        {loadingUsername && (
+          <div className="flex items-center gap-2 text-sm text-muted-foreground" aria-live="polite">
+            <Loader2 className="animate-spin" />
+            <span className="text-xs">
+              Loading stars for <span className="font-semibold">{loadingUsername}</span>…
+            </span>
+          </div>
+        )}
+      </div>
     </form>
   );
 }

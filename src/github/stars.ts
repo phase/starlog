@@ -61,6 +61,7 @@ export async function fetchStarredRepositoriesStream(
   client: GraphQLClient,
   username: string,
   maxIterations?: number,
+  shouldContinue?: () => boolean,
 ) {
   let hasNextPage = true;
   let cursor: string | null = null;
@@ -68,6 +69,10 @@ export async function fetchStarredRepositoriesStream(
 
   try {
     while (hasNextPage && (!maxIterations || iterations < maxIterations)) {
+      if (shouldContinue && !shouldContinue()) {
+        console.log("fetchStarredRepositoriesStream: stopped due to staleness");
+        break;
+      }
       iterations++;
       console.log(`Fetching page ${iterations}...`);
 
@@ -82,7 +87,11 @@ export async function fetchStarredRepositoriesStream(
       console.log(`Got ${edges.length} repositories on this page`);
 
       // Add current page's repositories to total list
-      consumer(edges);
+      if (!shouldContinue || shouldContinue()) {
+        consumer(edges);
+      } else {
+        break;
+      }
 
       // Update pagination info
       hasNextPage = pageInfo.hasNextPage;
@@ -107,6 +116,7 @@ async function fetchNewStarsUntilOverlap(
   username: string,
   existingRepoKeys: Set<string>,
   maxIterations?: number,
+  shouldContinue?: () => boolean,
 ): Promise<StarredRepository[]> {
   let hasNextPage = true;
   let cursor: string | null = null;
@@ -118,6 +128,10 @@ async function fetchNewStarsUntilOverlap(
 
   try {
     while (hasNextPage && (!maxIterations || iterations < maxIterations)) {
+      if (shouldContinue && !shouldContinue()) {
+        console.log("fetchNewStarsUntilOverlap: stopped due to staleness");
+        break;
+      }
       iterations++;
       const data: StarredRepositoriesResponse = await client.request<StarredRepositoriesResponse>(
         STARRED_REPOS_QUERY,
@@ -133,6 +147,10 @@ async function fetchNewStarsUntilOverlap(
       });
 
       if (pageNew.length > 0) {
+        if (shouldContinue && !shouldContinue()) {
+          console.log("fetchNewStarsUntilOverlap: consumer skipped due to staleness");
+          break;
+        }
         consumer(pageNew);
         pageNew.forEach((e) => emittedKeys.add(toKey(e)));
         newlyFetched.push(...pageNew);
@@ -216,6 +234,7 @@ export async function fetchStars(
   consumer: (data: StarredRepository[]) => void,
   username: string,
   token?: string,
+  options?: { shouldContinue?: () => boolean; maxIterations?: number },
 ) {
   // Assemble cached baseline (from localStorage or static JSON)
   let baseline: StarredRepository[] | null = null;
@@ -276,6 +295,8 @@ export async function fetchStars(
         client,
         username,
         existingKeys,
+        options?.maxIterations,
+        options?.shouldContinue,
       );
 
       // Update localStorage with merged, de-duplicated results
@@ -299,7 +320,30 @@ export async function fetchStars(
       }
     } else {
       // No baseline cache; fall back to streaming all from API
-      fetchStarredRepositoriesStream(consumer, client, username);
+      await fetchStarredRepositoriesStream(
+        consumer,
+        client,
+        username,
+        options?.maxIterations,
+        options?.shouldContinue,
+      );
     }
   }
+}
+
+export function fetchStarsCancelable(
+  consumer: (data: StarredRepository[]) => void,
+  username: string,
+  token?: string,
+  options?: { shouldContinue?: () => boolean; maxIterations?: number },
+) {
+  let isActive = true;
+  const mergedShouldContinue = () => isActive && (options?.shouldContinue ? options.shouldContinue() : true);
+  const promise = fetchStars(consumer, username, token, { ...options, shouldContinue: mergedShouldContinue });
+  return {
+    cancel: () => {
+      isActive = false;
+    },
+    promise,
+  } as const;
 }
