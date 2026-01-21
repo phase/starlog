@@ -190,7 +190,7 @@ export default async function fetchStarredRepositories(
 
       let data: StarredRepositoriesResponse | null = null;
 
-      // fetch stars, and retry if it failes
+      // fetch stars, and retry if it fails with rate limit handling
       let retries = 5;
       while (data == null && retries > 0) {
         try {
@@ -201,24 +201,53 @@ export default async function fetchStarredRepositories(
               cursor,
             },
           );
-        } catch (error) {
+        } catch (error: any) {
+          // Check if this is a partial error (status 200 with errors array but still has data)
+          // This happens when some orgs block fine-grained PATs
+          if (error?.response?.status === 200 && error?.response?.data?.user?.starredRepositories) {
+            console.log("Partial error (some repos inaccessible), using available data...");
+            data = error.response.data as StarredRepositoriesResponse;
+            break;
+          }
+
           console.error("Error fetching starred repositories:", error);
-          console.log(error);
           retries--;
+
+          const status = error?.response?.status;
+          if (status === 403 || status === 429) {
+            const retryAfter = error?.response?.headers?.get?.("retry-after");
+            const waitSeconds = retryAfter ? parseInt(retryAfter, 10) : 60;
+            console.log(`Rate limited. Waiting ${waitSeconds} seconds before retry...`);
+            await new Promise((resolve) => setTimeout(resolve, waitSeconds * 1000));
+          } else if (retries > 0) {
+            console.log(`Retrying in 5 seconds... (${retries} retries left)`);
+            await new Promise((resolve) => setTimeout(resolve, 5000));
+          }
         }
       }
 
-      //@ts-ignore this is weird?
-      const { edges, pageInfo } = data!.user.starredRepositories;
+      if (data == null) {
+        throw new Error("Failed to fetch starred repositories after all retries");
+      }
 
-      console.log(`Got ${edges.length} repositories on this page`);
+      //@ts-ignore - data is checked above
+      const { edges, pageInfo } = data.user.starredRepositories;
+      // Filter out null entries (repos that couldn't be accessed)
+      const validEdges = edges.filter((edge: StarredRepository | null) => edge !== null && edge?.node !== null);
+
+      console.log(`Got ${validEdges.length} repositories on this page`);
 
       // Add current page's repositories to total list
-      allStarredRepos.push(...edges);
+      allStarredRepos.push(...validEdges);
 
       // Update pagination info
       hasNextPage = pageInfo.hasNextPage;
       cursor = pageInfo.endCursor;
+
+      // avoid rate limiting
+      if (hasNextPage) {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+      }
     }
 
     const earlyStop = hasNextPage ? " (stopped early)" : "";
