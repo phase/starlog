@@ -75,7 +75,7 @@ export default function Dashboard() {
               <BlockCalendar starredRepos={starredRepos} />
             )}
             {activeTab === "stats" && (
-              <Stats calendarData={calendarData} starredRepos={starredRepos} />
+              <Stats starredRepos={starredRepos} />
             )}
             {activeTab === "summary" && (
               <Summary calendarData={calendarData} />

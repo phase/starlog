@@ -16,6 +16,7 @@ export const MONTHS = [
   "Dec",
 ];
 export const NO_DATA_COLOR = "hsl(var(--muted))";
+const EXCLUDED_RANKED_LANGUAGES = new Set(["Unknown", "Markdown"]);
 
 export function hexToHSL(hex: string): [number, number, number] {
   const r = parseInt(hex.slice(1, 3), 16) / 255;
@@ -72,52 +73,27 @@ export function getMonthData(year: number, month: number): (Date | null)[] {
   return days;
 }
 
-export function getTopLanguagesForYear(
+export function getRankedLanguagesForYear(
   calendarData: { [key: string]: StarredRepository[] },
   year: string,
+  limit = 12,
 ): [string, number][] {
   const languageCounts: { [key: string]: number } = {};
   Object.entries(calendarData).forEach(([date, repos]) => {
     if (date.startsWith(year)) {
       repos.forEach((repo) => {
-        const language = repo.node.primaryLanguage?.name || "Unknown";
-        languageCounts[language] = (languageCounts[language] || 0) + 1;
+        const language = repo.node.primaryLanguage?.name;
+        if (language && !EXCLUDED_RANKED_LANGUAGES.has(language)) {
+          languageCounts[language] = (languageCounts[language] || 0) + 1;
+        }
       });
     }
   });
   return Object.entries(languageCounts)
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5);
-}
-
-export function getNicheLanguagesForYear(
-  calendarData: { [key: string]: StarredRepository[] },
-  year: string,
-): [string, number][] {
-  const languageCounts: { [key: string]: number } = {};
-  Object.entries(calendarData).forEach(([date, repos]) => {
-    if (date.startsWith(year)) {
-      repos.forEach((repo) => {
-        const language = repo.node.primaryLanguage?.name || "Unknown";
-        languageCounts[language] = (languageCounts[language] || 0) + 1;
-      });
-    }
-  });
-
-  const topLanguages = new Set(
-    getTopLanguagesForYear(calendarData, year).map(([lang]) => lang),
-  );
-
-  return Object.entries(languageCounts)
-    .filter(
-      ([lang, count]) =>
-        count > 5 &&
-        count < 40 &&
-        !topLanguages.has(lang) &&
-        lang !== "Unknown",
+    .sort(([languageA, countA], [languageB, countB]) =>
+      countB - countA || languageA.localeCompare(languageB),
     )
-    .sort((a, b) => a[1] - b[1])
-    .slice(0, 5);
+    .slice(0, limit);
 }
 
 export function getMonthTotal(

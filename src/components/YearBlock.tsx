@@ -5,8 +5,7 @@ import { MonthSVG } from "./MonthSVG";
 import {
   DAYS,
   MONTHS,
-  getTopLanguagesForYear,
-  getNicheLanguagesForYear,
+  getRankedLanguagesForYear,
   getMonthTotal,
   getYearTotal,
   getFavoriteUsersForYear,
@@ -27,7 +26,7 @@ const YearBlock: React.FC<YearBlockProps> = ({
   const cellSize = 14;
   const gapSize = 2;
 
-  const nicheLanguages = getNicheLanguagesForYear(calendarData, year);
+  const rankedLanguages = getRankedLanguagesForYear(calendarData, year);
 
   return (
     <div className="space-y-4">
@@ -37,48 +36,37 @@ const YearBlock: React.FC<YearBlockProps> = ({
           ({getYearTotal(calendarData, year)} stars)
         </span>
       </div>
-      <div>
-        {!empty && (
-          <div className="text-xs text-muted-foreground">
-            Top languages:{" "}
-            {getTopLanguagesForYear(calendarData, year).map(
-              ([lang, count], index) => (
-                <span key={lang}>
-                  {index > 0 && ", "}
-                  <span
-                    className="inline-block w-2 h-2 rounded-full mr-1"
-                    style={{
-                      backgroundColor:
-                        //@ts-ignore
-                        LANGUAGE_COLORS[lang] || LANGUAGE_COLORS.default,
-                    }}
-                  ></span>
-                  {lang} ({count})
+      {!empty && (
+        <div className="text-xs text-muted-foreground">
+          <p className="mb-1 font-medium text-foreground">Languages</p>
+          <ol className="grid grid-flow-col grid-cols-3 grid-rows-4 gap-x-1 sm:gap-x-6">
+            {rankedLanguages.map(([lang, count], index) => (
+              <li
+                key={lang}
+                className="flex min-w-0 items-center gap-1 tabular-nums"
+                title={`${index + 1}. ${lang} (${count})`}
+              >
+                <span className="w-4 shrink-0 text-right text-[10px]">
+                  {index + 1}.
                 </span>
-              ),
-            )}
-          </div>
-        )}
-        {nicheLanguages.length > 0 && (
-          <div className="text-xs text-muted-foreground">
-            Niche languages:{" "}
-            {nicheLanguages.map(([lang, count], index) => (
-              <span key={lang}>
-                {index > 0 && ", "}
                 <span
-                  className="inline-block w-2 h-2 rounded-full mr-1"
+                  aria-hidden="true"
+                  className="size-2 shrink-0 rounded-full"
                   style={{
                     backgroundColor:
-                      //@ts-ignore
-                      LANGUAGE_COLORS[lang] || LANGUAGE_COLORS.default,
+                      LANGUAGE_COLORS[lang as keyof typeof LANGUAGE_COLORS] ||
+                      LANGUAGE_COLORS.default,
                   }}
-                ></span>
-                {lang} ({count})
-              </span>
+                />
+                <span className="min-w-0 truncate">{lang}</span>
+                <span className="hidden shrink-0 text-[10px] sm:inline">
+                  ({count})
+                </span>
+              </li>
             ))}
-          </div>
-        )}
-      </div>
+          </ol>
+        </div>
+      )}
       <div className="flex">
         <div className="mr-2 text-muted-foreground hidden sm:block">
           {DAYS.map((day, index) => (
