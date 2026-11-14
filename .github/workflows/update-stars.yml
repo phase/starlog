@@ -1,0 +1,61 @@
+name: Update Stars Cache
+
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  # needed to dispatch the deploy workflow
+  actions: write
+
+env:
+  SYNC_MESSAGE: "chore: update phase.json cache"
+  BOT_EMAIL: "github-actions[bot]@users.noreply.github.com"
+
+jobs:
+  update-cache:
+    runs-on: ubuntu-latest
+    steps:
+      # Pushes use the default GITHUB_TOKEN, which has write access via `permissions` above.
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Install dependencies
+        run: bun install
+
+      - name: Fetch starred repositories
+        run: bun run stars -u phase -t ${{ secrets.GH_PAT }}
+
+      - name: Commit and push changes
+        id: push
+        run: |
+          git config --local user.email "$BOT_EMAIL"
+          git config --local user.name "github-actions[bot]"
+          git add public/cached/phase.json
+          if git diff --staged --quiet; then
+            echo "No changes to stars cache"
+            exit 0
+          fi
+          # If the last commit was also an automatic sync, fold this sync into it instead of adding a new commit.
+          if [ "$(git log -1 --format=%ae)" = "$BOT_EMAIL" ] && [ "$(git log -1 --format=%s)" = "$SYNC_MESSAGE" ]; then
+            git commit --amend --reset-author -m "$SYNC_MESSAGE"
+            git push --force-with-lease
+          else
+            git commit -m "$SYNC_MESSAGE"
+            git push
+          fi
+          echo "pushed=true" >> "$GITHUB_OUTPUT"
+
+      # Pushes made with GITHUB_TOKEN don't trigger other workflows, but workflow_dispatch does.
+      - name: Trigger deploy
+        if: steps.push.outputs.pushed == 'true'
+        run: gh workflow run build.yml --ref "$GITHUB_REF_NAME"
+        env:
+          GH_TOKEN: ${{ github.token }}
