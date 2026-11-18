@@ -21,6 +21,9 @@ jobs:
       # Pushes use the default GITHUB_TOKEN, which has write access via `permissions` above.
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          # The default depth of 1 hides HEAD's parent, so amending would create a root commit and wipe history.
+          fetch-depth: 2
 
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
@@ -44,7 +47,9 @@ jobs:
             exit 0
           fi
           # If the last commit was also an automatic sync, fold this sync into it instead of adding a new commit.
-          if [ "$(git log -1 --format=%ae)" = "$BOT_EMAIL" ] && [ "$(git log -1 --format=%s)" = "$SYNC_MESSAGE" ]; then
+          # Only squash when the parent is present, so the amended commit keeps its history.
+          if [ "$(git log -1 --format=%ae)" = "$BOT_EMAIL" ] && [ "$(git log -1 --format=%s)" = "$SYNC_MESSAGE" ] \
+            && git rev-parse -q --verify HEAD~1 >/dev/null; then
             git commit --amend --reset-author -m "$SYNC_MESSAGE"
             git push --force-with-lease
           else
